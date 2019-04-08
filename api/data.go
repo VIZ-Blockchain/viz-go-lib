@@ -74,7 +74,7 @@ type Account struct {
 	LastRootPost           *types.Time      `json:"last_root_post"`
 	LastPost               *types.Time      `json:"last_post"`
 	AverageBandwidth       int64            `json:"average_bandwidth"`
-	LifetimeBandwidth      int64            `json:"lifetime_bandwidth"`
+	LifetimeBandwidth      *types.Int64     `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    *types.Time      `json:"last_bandwidth_update"`
 	WitnessVotes           []string         `json:"witness_votes"`
 }
