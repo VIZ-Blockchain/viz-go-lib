@@ -40,7 +40,7 @@ type Account struct {
 	Name                   string           `json:"name"`
 	Owner                  *types.Authority `json:"owner"`
 	Active                 *types.Authority `json:"active"`
-	Posting                *types.Authority `json:"posting"`
+	Regular                *types.Authority `json:"regular"`
 	MemoKey                string           `json:"memo_key"`
 	JSONMetadata           string           `json:"json_metadata"`
 	Proxy                  string           `json:"proxy"`
@@ -237,8 +237,8 @@ type ProposalObject struct {
 	AvailableActiveApprovals  []string          `json:"available_active_approvals"`
 	RequiredOwnerApprovals    []string          `json:"required_owner_approvals"`
 	AvailableOwnerApprovals   []string          `json:"available_owner_approvals"`
-	RequiredPostingApprovals  []string          `json:"required_posting_approvals"`
-	AvailablePostingApprovals []string          `json:"available_posting_approvals"`
+	RequiredRegularApprovals  []string          `json:"required_regular_approvals"`
+	AvailableRegularApprovals []string          `json:"available_regular_approvals"`
 	AvailableKeyApprovals     []string          `json:"available_key_approvals"`
 }
 
