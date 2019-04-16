@@ -36,7 +36,7 @@ type CommitteeVoteState struct {
 
 //Account structure for the GetAccounts and LookupAccountNames functions
 type Account struct {
-	ID                     *types.Int       `json:"id"`
+	ID                     int64            `json:"id"`
 	Name                   string           `json:"name"`
 	Master                 *types.Authority `json:"master_authority"`
 	Active                 *types.Authority `json:"active_authority"`
@@ -73,11 +73,11 @@ type Account struct {
 	BenefactorAwards       int64            `json:"benefactor_awards"`
 	ProxiedVsfVotes        []int64          `json:"proxied_vsf_votes"`
 	WitnessesVotedFor      uint16           `json:"witnesses_voted_for"`
-	WitnessesVoteWeight    *types.Int64     `json:"witnesses_vote_weight"`
+	WitnessesVoteWeight    string           `json:"witnesses_vote_weight"`
 	LastPost               *types.Time      `json:"last_post"`
 	LastRootPost           *types.Time      `json:"last_root_post"`
 	AverageBandwidth       int64            `json:"average_bandwidth"`
-	LifetimeBandwidth      *types.Int64     `json:"lifetime_bandwidth"`
+	LifetimeBandwidth      string           `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    *types.Time      `json:"last_bandwidth_update"`
 	WitnessVotes           []string         `json:"witness_votes"`
 }

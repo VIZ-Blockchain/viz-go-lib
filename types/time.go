@@ -28,6 +28,21 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+//GobEncode function for packing the Time type in gob.
+func (t *Time) GobEncode() ([]byte, error) {
+	return []byte(t.Time.Format(layout)), nil
+}
+
+//GobDecode unpacking the gob parameter in the Time type.
+func (t *Time) GobDecode(data []byte) error {
+	parsed, err := time.ParseInLocation(layout, string(data), time.UTC)
+	if err != nil {
+		return err
+	}
+	t.Time = &parsed
+	return nil
+}
+
 //MarshalTransaction is a function of converting type Time to bytes.
 func (t *Time) MarshalTransaction(encoder *transaction.Encoder) error {
 	return encoder.Encode(uint32(t.Time.Unix()))
