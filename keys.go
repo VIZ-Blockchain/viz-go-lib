@@ -32,7 +32,7 @@ const (
 type Keys struct {
 	PKey []string
 	AKey []string
-	OKey []string
+	GKey []string
 	MKey []string
 }
 
@@ -50,8 +50,8 @@ func init() {
 	OpTypeKey["custom"] = []string{"regular"}
 	OpTypeKey["set_withdraw_vesting_route"] = []string{"active"}
 	OpTypeKey["request_account_recovery"] = []string{"active"}
-	OpTypeKey["recover_account"] = []string{"owner"}
-	OpTypeKey["change_recovery_account"] = []string{"owner"}
+	OpTypeKey["recover_account"] = []string{"master"}
+	OpTypeKey["change_recovery_account"] = []string{"master"}
 	OpTypeKey["escrow_transfer"] = []string{"active"}
 	OpTypeKey["escrow_dispute"] = []string{"active"}
 	OpTypeKey["escrow_release"] = []string{"active"}
@@ -117,11 +117,11 @@ func (client *Client) SigningKeys(trx types.Operation) ([][]byte, error) {
 				}
 				keys = append(keys, privKey)
 			}
-		case "owner":
-			for _, keyStr := range client.CurrentKeys.OKey {
+		case "master":
+			for _, keyStr := range client.CurrentKeys.GKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
-					return nil, errors.New("error decode Owner Key: " + err.Error())
+					return nil, errors.New("error decode Master Key: " + err.Error())
 				}
 				keys = append(keys, privKey)
 			}

@@ -7,7 +7,7 @@ import (
 //AccountUpdateOperation represents account_update operation data.
 type AccountUpdateOperation struct {
 	Account      string     `json:"account"`
-	Owner        *Authority `json:"owner,omitempty"`
+	Master       *Authority `json:"master,omitempty"`
 	Active       *Authority `json:"active,omitempty"`
 	Regular      *Authority `json:"regular,omitempty"`
 	MemoKey      string     `json:"memo_key"`
@@ -29,9 +29,9 @@ func (op *AccountUpdateOperation) MarshalTransaction(encoder *transaction.Encode
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeAccountUpdate.Code()))
 	enc.EncodeString(op.Account)
-	if op.Owner != nil {
+	if op.Master != nil {
 		enc.Encode(byte(1))
-		enc.Encode(op.Owner)
+		enc.Encode(op.Master)
 	} else {
 		enc.Encode(byte(0))
 	}

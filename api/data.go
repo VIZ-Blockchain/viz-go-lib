@@ -38,16 +38,18 @@ type CommitteeVoteState struct {
 type Account struct {
 	ID                     *types.Int       `json:"id"`
 	Name                   string           `json:"name"`
-	Owner                  *types.Authority `json:"owner"`
-	Active                 *types.Authority `json:"active"`
-	Regular                *types.Authority `json:"regular"`
-	MemoKey                string           `json:"memo_key"`
+	Master                 *types.Authority `json:"master_authority"`
+	Active                 *types.Authority `json:"active_authority"`
+	Regular                *types.Authority `json:"regular_authority"`
+	Memo                   string           `json:"memo_key"`
 	JSONMetadata           string           `json:"json_metadata"`
 	Proxy                  string           `json:"proxy"`
 	Referrer               string           `json:"referrer"`
-	LastOwnerUpdate        *types.Time      `json:"last_owner_update"`
+	LastMasterUpdate       *types.Time      `json:"last_master_update"`
 	LastAccountUpdate      *types.Time      `json:"last_account_update"`
 	Created                *types.Time      `json:"created"`
+	RecoveryAccount        string           `json:"recovery_account"`
+	LastAccountRecovery    *types.Time      `json:"last_account_recovery"`
 	SubcontentCount        uint32           `json:"subcontent_count"`
 	VoteCount              uint32           `json:"vote_count"`
 	ContentCount           uint32           `json:"content_count"`
@@ -57,10 +59,6 @@ type Account struct {
 	Energy                 int16            `json:"energy"`
 	LastVoteTime           *types.Time      `json:"last_vote_time"`
 	Balance                *types.Asset     `json:"balance"`
-	CurationRewards        int64            `json:"curation_rewards"`
-	PostingRewards         int64            `json:"posting_rewards"`
-	ReceiverAwards         int64            `json:"receiver_awards"`
-	BenefactorAwards       int64            `json:"benefactor_awards"`
 	VestingShares          *types.Asset     `json:"vesting_shares"`
 	DelegatedVestingShares *types.Asset     `json:"delegated_vesting_shares"`
 	ReceivedVestingShares  *types.Asset     `json:"received_vesting_shares"`
@@ -69,10 +67,15 @@ type Account struct {
 	Withdrawn              int64            `json:"withdrawn"`
 	ToWithdraw             int64            `json:"to_withdraw"`
 	WithdrawRoutes         uint16           `json:"withdraw_routes"`
+	CurationRewards        int64            `json:"curation_rewards"`
+	PostingRewards         int64            `json:"posting_rewards"`
+	ReceiverAwards         int64            `json:"receiver_awards"`
+	BenefactorAwards       int64            `json:"benefactor_awards"`
 	ProxiedVsfVotes        []int64          `json:"proxied_vsf_votes"`
 	WitnessesVotedFor      uint16           `json:"witnesses_voted_for"`
-	LastRootPost           *types.Time      `json:"last_root_post"`
+	WitnessesVoteWeight    *types.Int64     `json:"witnesses_vote_weight"`
 	LastPost               *types.Time      `json:"last_post"`
+	LastRootPost           *types.Time      `json:"last_root_post"`
 	AverageBandwidth       int64            `json:"average_bandwidth"`
 	LifetimeBandwidth      *types.Int64     `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    *types.Time      `json:"last_bandwidth_update"`
@@ -217,12 +220,12 @@ type NextScheduledHardfork struct {
 	LiveTime  *types.Time `json:"live_time"`
 }
 
-//OwnerHistory structure for the GetOwnerHistory function.
-type OwnerHistory struct {
-	ID                     *types.Int       `json:"id"`
-	Account                string           `json:"account"`
-	PreviousOwnerAuthority *types.Authority `json:"previous_owner_authority"`
-	LastValidTime          *types.Time      `json:"last_valid_time"`
+//MasterHistory structure for the GetMasterHistory function.
+type MasterHistory struct {
+	ID                      *types.Int       `json:"id"`
+	Account                 string           `json:"account"`
+	PreviousMasterAuthority *types.Authority `json:"previous_master_authority"`
+	LastValidTime           *types.Time      `json:"last_valid_time"`
 }
 
 //ProposalObject structure for the GetProposedTransaction function.
@@ -278,11 +281,11 @@ type Escrow struct {
 
 //AccountRecoveryRequest structure for the GetRecoveryRequest function.
 type AccountRecoveryRequest struct {
-	ID                *types.Int       `json:"id"`
-	AccountToRecover  string           `json:"account_to_recover"`
-	NewOwnerAuthority *types.Authority `json:"new_owner_authority"`
-	Expires           *types.Time      `json:"expires"`
-	Extensions        []interface{}    `json:"extensions"`
+	ID                 *types.Int       `json:"id"`
+	AccountToRecover   string           `json:"account_to_recover"`
+	NewMasterAuthority *types.Authority `json:"new_master_authority"`
+	Expires            *types.Time      `json:"expires"`
+	Extensions         []interface{}    `json:"extensions"`
 }
 
 //Blogs structure for the GetBlog function

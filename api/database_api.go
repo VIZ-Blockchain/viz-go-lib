@@ -100,10 +100,10 @@ func (api *API) GetNextScheduledHardfork() (*NextScheduledHardfork, error) {
 	return &resp, err
 }
 
-//GetOwnerHistory api request get_owner_history
-func (api *API) GetOwnerHistory(accountName string) ([]*OwnerHistory, error) {
-	var resp []*OwnerHistory
-	err := api.call("database_api", "get_owner_history", []interface{}{accountName}, &resp)
+//GetMasterHistory api request get_master_history
+func (api *API) GetOwnerHistory(accountName string) ([]*MasterHistory, error) {
+	var resp []*MasterHistory
+	err := api.call("database_api", "get_master_history", []interface{}{accountName}, &resp)
 	return resp, err
 }
 

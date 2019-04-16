@@ -10,7 +10,7 @@ type AccountCreateOperation struct {
 	Delegation     *Asset        `json:"delegation"`
 	Creator        string        `json:"creator"`
 	NewAccountName string        `json:"new_account_name"`
-	Owner          *Authority    `json:"owner"`
+	Master         *Authority    `json:"master"`
 	Active         *Authority    `json:"active"`
 	Regular        *Authority    `json:"regular"`
 	MemoKey        string        `json:"memo_key"`
@@ -37,7 +37,7 @@ func (op *AccountCreateOperation) MarshalTransaction(encoder *transaction.Encode
 	enc.Encode(op.Delegation)
 	enc.Encode(op.Creator)
 	enc.Encode(op.NewAccountName)
-	enc.Encode(op.Owner)
+	enc.Encode(op.Master)
 	enc.Encode(op.Active)
 	enc.Encode(op.Regular)
 	enc.EncodePubKey(op.MemoKey)
