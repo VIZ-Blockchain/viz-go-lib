@@ -11,8 +11,8 @@ import (
 //BResp of response when sending a transaction.
 type BResp struct {
 	ID       string
-	BlockNum int32
-	TrxNum   int32
+	BlockNum uint32
+	TrxNum   string
 	Expired  bool
 	JSONTrx  string
 }

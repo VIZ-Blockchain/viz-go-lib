@@ -197,10 +197,10 @@ type DynamicGlobalProperties struct {
 	AverageBlockSize           uint32       `json:"average_block_size"`
 	MaximumBlockSize           uint32       `json:"maximum_block_size"`
 	CurrentAslot               uint64       `json:"current_aslot"`
-	RecentSlotsFilled          *types.Int64 `json:"recent_slots_filled"`
+	RecentSlotsFilled          string `json:"recent_slots_filled"`
 	ParticipationCount         uint8        `json:"participation_count"`
 	LastIrreversibleBlockNum   uint32       `json:"last_irreversible_block_num"`
-	MaxVirtualBandwidth        uint64       `json:"max_virtual_bandwidth"`
+	MaxVirtualBandwidth        string       `json:"max_virtual_bandwidth"`
 	CurrentReserveRatio        uint64       `json:"current_reserve_ratio"`
 	VoteRegenerationPerDay     uint32       `json:"vote_regeneration_per_day"`
 	BandwidthReserveCandidates uint32       `json:"bandwidth_reserve_candidates"`
@@ -394,8 +394,8 @@ type InviteObject struct {
 //BroadcastResponse structure for the BroadcastTransactionSynchronous function
 type BroadcastResponse struct {
 	ID       string `json:"id"`
-	BlockNum int32  `json:"block_num"`
-	TrxNum   int32  `json:"trx_num"`
+	BlockNum uint32  `json:"block_num"`
+	TrxNum   string  `json:"trx_num"`
 	Expired  bool   `json:"expired"`
 }
 
