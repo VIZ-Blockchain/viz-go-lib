@@ -63,6 +63,10 @@ const (
 	TypePaidSubscribe                  OpType = "paid_subscribe"
 	TypePaidSubscriptionAction         OpType = "paid_subscription_action" //Virtual Operation
 	TypeCancelPaidSubscription         OpType = "cancel_paid_subscription" //Virtual Operation
+	TypeSetAccountPrice                OpType = "set_account_price"
+	TypeSetSubaccountPrice             OpType = "set_subaccount_price"
+	TypeBuyAccount                     OpType = "buy_account"
+	TypeAccountSale                    OpType = "account_sale" //Virtual Operation
 )
 
 var opTypes = [...]OpType{
@@ -120,6 +124,10 @@ var opTypes = [...]OpType{
 	TypePaidSubscribe,
 	TypePaidSubscriptionAction,
 	TypeCancelPaidSubscription,
+	TypeSetAccountPrice,
+	TypeSetSubaccountPrice,
+	TypeBuyAccount,
+	TypeAccountSale,
 }
 
 // opCodes keeps mapping operation type -> operation code.

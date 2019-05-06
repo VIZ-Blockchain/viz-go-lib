@@ -65,6 +65,10 @@ var dataObjects = map[OpType]Operation{
 	TypePaidSubscribe:                  &PaidSubscribeOperation{},
 	TypePaidSubscriptionAction:         &PaidSubscriptionActionOperation{}, //Virtual Operation
 	TypeCancelPaidSubscription:         &CancelPaidSubscriptionOperation{}, //Virtual Operation
+	TypeSetAccountPrice:                &SetAccountPriceOperation{},
+	TypeSetSubaccountPrice:             &SetSubaccountPriceOperation{},
+	TypeBuyAccount:                     &BuyAccountOperation{},
+	TypeAccountSale:                    &AccountSaleOperation{}, //Virtual Operation
 }
 
 // Operation represents an operation stored in a transaction.

@@ -30,7 +30,7 @@ const (
 //Keys is used as a keystroke for a specific user.
 //Only a few keys can be set.
 type Keys struct {
-	PKey []string
+	RKey []string
 	AKey []string
 	GKey []string
 	MKey []string
@@ -73,6 +73,9 @@ func init() {
 	OpTypeKey["award"] = []string{"regular"}
 	OpTypeKey["set_paid_subscription"] = []string{"active"}
 	OpTypeKey["paid_subscribe"] = []string{"active"}
+	OpTypeKey["set_account_price"] = []string{"master"}
+	OpTypeKey["set_subaccount_price"] = []string{"master"}
+	OpTypeKey["buy_account"] = []string{"active"}
 
 	seed := time.Now().UnixNano()
 
@@ -102,7 +105,7 @@ func (client *Client) SigningKeys(trx types.Operation) ([][]byte, error) {
 	for _, val := range opKeys {
 		switch val {
 		case "regular":
-			for _, keyStr := range client.CurrentKeys.PKey {
+			for _, keyStr := range client.CurrentKeys.RKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
 					return nil, errors.New("error decode Regular Key: " + err.Error())
@@ -157,7 +160,7 @@ func GenPassword() string {
 }
 
 //GetPrivateKey generates a private key based on the specified parameters.
-func GetPrivateKey(user, role, password string) string {
+func (client *Client) GetPrivateKey(user, role, password string) string {
 	hashSha256 := sha256.Sum256([]byte(user + role + password))
 	pk := append([]byte{0x80}, hashSha256[:]...)
 	chs := sha256.Sum256(pk)
@@ -167,7 +170,7 @@ func GetPrivateKey(user, role, password string) string {
 }
 
 //GetPublicKey generates a public key based on the prefix and the private key.
-func GetPublicKey(prefix, privatekey string) string {
+func (client *Client) GetPublicKey(privatekey string) string {
 	b58 := base58.Decode(privatekey)
 	tpk := b58[:len(b58)-4]
 	chs := b58[len(b58)-4:]
@@ -186,5 +189,5 @@ func GetPublicKey(prefix, privatekey string) string {
 	}
 	nc := chHash.Sum(nil)
 	pk := append(priv.PubKey().SerializeCompressed(), nc[:4]...)
-	return prefix + base58.Encode(pk)
+	return client.ConfigNet.AddressPrefix + base58.Encode(pk)
 }

@@ -11,14 +11,14 @@ import (
 //BResp of response when sending a transaction.
 type BResp struct {
 	ID       string
-	BlockNum uint32
-	TrxNum   string
+	BlockNum int32
+	TrxNum   int32
 	Expired  bool
 	JSONTrx  string
 }
 
 //SendTrx generates and sends an array of transactions to VIZ.
-func (client *Client) SendTrx(username string, strx []types.Operation) (*BResp, error) {
+func (client *Client) SendTrx(strx []types.Operation) (*BResp, error) {
 	var bresp BResp
 
 	// Getting the necessary parameters

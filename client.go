@@ -22,6 +22,8 @@ type Client struct {
 
 	chainID string
 
+	ConfigNet *api.Config
+
 	AsyncProtocol bool
 
 	// Database represents database_api.
@@ -34,6 +36,7 @@ type Client struct {
 // NewClient creates a new RPC client that use the given CallCloser internally.
 // Initialize only server present API. Absent API initialized as nil value.
 func NewClient(s string) (*Client, error) {
+	var err error
 	// Parse URL
 	u, err := url.Parse(s)
 	if err != nil {
@@ -62,11 +65,12 @@ func NewClient(s string) (*Client, error) {
 
 	client.API = api.NewAPI(client.cc)
 
-	chainID, err := client.API.GetConfig()
+	client.ConfigNet, err = client.API.GetConfig()
 	if err != nil {
 		return nil, err
 	}
-	client.chainID = chainID.ChainID
+
+	client.chainID = client.ConfigNet.ChainID
 
 	return client, nil
 }

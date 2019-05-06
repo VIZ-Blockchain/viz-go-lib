@@ -127,6 +127,7 @@ type Config struct {
 	CommitteeAccount                 string        `json:"CHAIN_COMMITTEE_ACCOUNT"`
 	CommitteePublicKey               string        `json:"CHAIN_COMMITTEE_PUBLIC_KEY_STR"`
 	IrreversibleThreshold            *types.Int    `json:"CHAIN_IRREVERSIBLE_THRESHOLD"`
+	IrreversibleSupportMinRun        *types.Int    `json:"CHAIN_IRREVERSIBLE_SUPPORT_MIN_RUN"`
 	MaxAccountNameLength             *types.Int    `json:"CHAIN_MAX_ACCOUNT_NAME_LENGTH"`
 	MaxAccountWitnessVotes           *types.Int    `json:"CHAIN_MAX_ACCOUNT_WITNESS_VOTES"`
 	BlockSize                        *types.Int    `json:"CHAIN_BLOCK_SIZE"`
@@ -159,6 +160,8 @@ type Config struct {
 	TokenSymbol                      *types.Int    `json:"TOKEN_SYMBOL"`
 	SharesSymbol                     *types.Int    `json:"SHARES_SYMBOL"`
 	ChainName                        string        `json:"CHAIN_NAME"`
+	BlockGenerationPostponedTXLimit  *types.Int    `json:"CHAIN_BLOCK_GENERATION_POSTPONED_TX_LIMIT"`
+	PendingTransactionExecutionLimit *types.Int    `json:"CHAIN_PENDING_TRANSACTION_EXECUTION_LIMIT"`
 }
 
 //DatabaseInfo structure for the GetDatabaseInfo function.
@@ -197,7 +200,7 @@ type DynamicGlobalProperties struct {
 	AverageBlockSize           uint32       `json:"average_block_size"`
 	MaximumBlockSize           uint32       `json:"maximum_block_size"`
 	CurrentAslot               uint64       `json:"current_aslot"`
-	RecentSlotsFilled          string `json:"recent_slots_filled"`
+	RecentSlotsFilled          string       `json:"recent_slots_filled"`
 	ParticipationCount         uint8        `json:"participation_count"`
 	LastIrreversibleBlockNum   uint32       `json:"last_irreversible_block_num"`
 	MaxVirtualBandwidth        string       `json:"max_virtual_bandwidth"`
@@ -394,8 +397,8 @@ type InviteObject struct {
 //BroadcastResponse structure for the BroadcastTransactionSynchronous function
 type BroadcastResponse struct {
 	ID       string `json:"id"`
-	BlockNum uint32  `json:"block_num"`
-	TrxNum   string  `json:"trx_num"`
+	BlockNum int32  `json:"block_num"`
+	TrxNum   int32  `json:"trx_num"`
 	Expired  bool   `json:"expired"`
 }
 
