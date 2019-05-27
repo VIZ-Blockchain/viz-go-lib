@@ -21,9 +21,9 @@ type ChainProperties struct {
 	InflationWitnessPercent               int16  `json:"inflation_witness_percent,omitempty"`
 	InflationRatioCommitteeVsRewardFund   int16  `json:"inflation_ratio_committee_vs_reward_fund,omitempty"`
 	InflationRecalcPeriod                 uint32 `json:"inflation_recalc_period,omitempty"`
-	DataOperationsCostAdditionalBandwidth uint32 `json:"data_operations_cost_additional_bandwidth"`
-	WitnessMissPenaltyPercent             int16  `json:"witness_miss_penalty_percent"`
-	WitnessMissPenaltyDuration            uint32 `json:"witness_miss_penalty_duration"`
+	DataOperationsCostAdditionalBandwidth uint32 `json:"data_operations_cost_additional_bandwidth,omitempty"`
+	WitnessMissPenaltyPercent             int16  `json:"witness_miss_penalty_percent,omitempty"`
+	WitnessMissPenaltyDuration            uint32 `json:"witness_miss_penalty_duration,omitempty"`
 }
 
 //MarshalTransaction is a function of converting type ChainProperties to bytes.

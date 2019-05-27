@@ -6,7 +6,7 @@ import (
 
 //CommitteeObject structure for the GetCommitteeRequest function
 type CommitteeObject struct {
-	ID                     *types.Int            `json:"id"`
+	ID                     int64                 `json:"id"`
 	RequestID              uint32                `json:"request_id"`
 	Url                    string                `json:"url"`
 	Creator                string                `json:"creator"`
@@ -64,20 +64,20 @@ type Account struct {
 	ReceivedVestingShares  *types.Asset           `json:"received_vesting_shares"`
 	VestingWithdrawRate    *types.Asset           `json:"vesting_withdraw_rate"`
 	NextVestingWithdrawal  *types.Time            `json:"next_vesting_withdrawal"`
-	Withdrawn              int64                  `json:"withdrawn"`
-	ToWithdraw             int64                  `json:"to_withdraw"`
+	Withdrawn              *types.Int64           `json:"withdrawn"`
+	ToWithdraw             *types.Int64           `json:"to_withdraw"`
 	WithdrawRoutes         uint16                 `json:"withdraw_routes"`
-	CurationRewards        int64                  `json:"curation_rewards"`
-	PostingRewards         int64                  `json:"posting_rewards"`
-	ReceiverAwards         int64                  `json:"receiver_awards"`
-	BenefactorAwards       int64                  `json:"benefactor_awards"`
-	ProxiedVsfVotes        []int64                `json:"proxied_vsf_votes"`
+	CurationRewards        *types.Int64           `json:"curation_rewards"`
+	PostingRewards         *types.Int64           `json:"posting_rewards"`
+	ReceiverAwards         *types.Int64           `json:"receiver_awards"`
+	BenefactorAwards       *types.Int64           `json:"benefactor_awards"`
+	ProxiedVsfVotes        []*types.Int64         `json:"proxied_vsf_votes"`
 	WitnessesVotedFor      uint16                 `json:"witnesses_voted_for"`
-	WitnessesVoteWeight    string                 `json:"witnesses_vote_weight"`
+	WitnessesVoteWeight    *types.Int64           `json:"witnesses_vote_weight"`
 	LastPost               *types.Time            `json:"last_post"`
 	LastRootPost           *types.Time            `json:"last_root_post"`
-	AverageBandwidth       int64                  `json:"average_bandwidth"`
-	LifetimeBandwidth      string                 `json:"lifetime_bandwidth"`
+	AverageBandwidth       *types.Int64           `json:"average_bandwidth"`
+	LifetimeBandwidth      *types.Int64           `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    *types.Time            `json:"last_bandwidth_update"`
 	WitnessVotes           []string               `json:"witness_votes"`
 }
@@ -382,7 +382,7 @@ type FollowObject struct {
 
 //InviteObject structure for the GetInviteById and GetInviteByKey functions
 type InviteObject struct {
-	ID             *types.Int   `json:"id"`
+	ID             int64        `json:"id"`
 	Creator        string       `json:"creator"`
 	Receiver       string       `json:"receiver"`
 	InviteKey      string       `json:"invite_key"`
@@ -422,7 +422,7 @@ type VoteState struct {
 
 //Content structure for the GetContent, GetContentReplies, GetRepliesByLastUpdate, GetDiscussionsByActive, GetDiscussionsByAuthorBeforeDate, GetDiscussionsByBlog, GetDiscussionsByCashout, GetDiscussionsByChildren, GetDiscussionsByComments, GetDiscussionsByCreated, GetDiscussionsByFeed, GetDiscussionsByHot, GetDiscussionsByPayout, GetDiscussionsByPromoted, GetDiscussionsByTrending and GetDiscussionsByVotes function.
 type Content struct {
-	ID                      *types.ID     `json:"id"`
+	ID                      int64         `json:"id"`
 	Author                  string        `json:"author"`
 	Permlink                string        `json:"permlink"`
 	Category                string        `json:"category"`
@@ -509,7 +509,7 @@ type WitnessSchedule struct {
 
 //Witness structure for the GetWitnessByAccount, GetWitnesses and GetWitnessByVote function.
 type Witness struct {
-	ID                    *types.Int             `json:"id"`
+	ID                    int64                  `json:"id"`
 	Owner                 string                 `json:"owner"`
 	Created               *types.Time            `json:"created"`
 	URL                   string                 `json:"url"`
@@ -518,7 +518,9 @@ type Witness struct {
 	LastConfirmedBlockNum uint64                 `json:"last_confirmed_block_num"`
 	SigningKey            string                 `json:"signing_key"`
 	Props                 *types.ChainProperties `json:"props"`
-	Votes                 int64                  `json:"votes"`
+	Votes                 *types.Int64           `json:"votes"`
+	PenaltyPercent        uint32                 `json:"penalty_percent"`
+	CountedVotes          *types.Int64           `json:"counted_votes"`
 	VirtualLastUpdate     *types.UInt64          `json:"virtual_last_update"`
 	VirtualPosition       *types.UInt64          `json:"virtual_position"`
 	VirtualScheduledTime  *types.UInt64          `json:"virtual_scheduled_time"`
@@ -530,30 +532,32 @@ type Witness struct {
 
 //SubscriptionState structure for the GetPaidSubscriptionOptions function.
 type SubscriptionState struct {
-	Creator                                       string      `json:"creator"`
-	Url                                           string      `json:"url"`
-	Levels                                        uint16      `json:"levels"`
-	Amount                                        int64       `json:"amount"`
-	Period                                        uint16      `json:"period"`
-	UpdateTime                                    *types.Time `json:"update_time"`
-	ActiveSubscribers                             []string    `json:"active_subscribers"`
-	ActiveSubscribersCount                        uint32      `json:"active_subscribers_count"`
-	ActiveSubscribersSummaryAmount                int64       `json:"active_subscribers_summary_amount"`
-	ActiveSubscribersWithAutoRenewal              []string    `json:"active_subscribers_with_auto_renewal"`
-	ActiveSubscribersWithAutoRenewalCount         uint32      `json:"active_subscribers_with_auto_renewal_count"`
-	ActiveSubscribersWithAutoRenewalSummaryAmount int64       `json:"active_subscribers_with_auto_renewal_summary_amount"`
+	ID                                            int64        `json:"id"`
+	Creator                                       string       `json:"creator"`
+	Url                                           string       `json:"url"`
+	Levels                                        uint16       `json:"levels"`
+	Amount                                        *types.Int64 `json:"amount"`
+	Period                                        uint16       `json:"period"`
+	UpdateTime                                    *types.Time  `json:"update_time"`
+	ActiveSubscribers                             []string     `json:"active_subscribers"`
+	ActiveSubscribersCount                        uint32       `json:"active_subscribers_count"`
+	ActiveSubscribersSummaryAmount                *types.Int64 `json:"active_subscribers_summary_amount"`
+	ActiveSubscribersWithAutoRenewal              []string     `json:"active_subscribers_with_auto_renewal"`
+	ActiveSubscribersWithAutoRenewalCount         uint32       `json:"active_subscribers_with_auto_renewal_count"`
+	ActiveSubscribersWithAutoRenewalSummaryAmount *types.Int64 `json:"active_subscribers_with_auto_renewal_summary_amount"`
 }
 
 //SubscribeState structure for the GetPaidSubscriptionStatus function.
 type SubscribeState struct {
-	Subscriber  string      `json:"subscriber"`
-	Creator     string      `json:"creator"`
-	Level       uint16      `json:"level"`
-	Amount      int64       `json:"amount"`
-	Period      uint16      `json:"period"`
-	StartTime   *types.Time `json:"start_time"`
-	NextTime    *types.Time `json:"next_time"`
-	EndTime     *types.Time `json:"end_time"`
-	Active      bool        `json:"active"`
-	AutoRenewal bool        `json:"auto_renewal"`
+	ID          int64        `json:"id"`
+	Subscriber  string       `json:"subscriber"`
+	Creator     string       `json:"creator"`
+	Level       uint16       `json:"level"`
+	Amount      *types.Int64 `json:"amount"`
+	Period      uint16       `json:"period"`
+	StartTime   *types.Time  `json:"start_time"`
+	NextTime    *types.Time  `json:"next_time"`
+	EndTime     *types.Time  `json:"end_time"`
+	Active      bool         `json:"active"`
+	AutoRenewal bool         `json:"auto_renewal"`
 }
