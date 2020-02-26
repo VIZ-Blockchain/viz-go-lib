@@ -2,10 +2,11 @@ package types
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"strconv"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/pkg/errors"
 )
 
 func unmarshalInt(data []byte) (int64, error) {
@@ -24,7 +25,7 @@ func unmarshalInt(data []byte) (int64, error) {
 	} else {
 		err = json.Unmarshal(data, &i)
 	}
-	return i, errors.Wrapf(err, "types: failed to unmarshal integer: %v", data)
+	return i, fmt.Errorf("types: failed to unmarshal integer: %v\n Error : %w", data, err)
 }
 
 //Int8 type from parameter JSON

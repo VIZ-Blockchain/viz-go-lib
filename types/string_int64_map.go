@@ -1,6 +1,7 @@
 package types
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 )
@@ -56,4 +57,13 @@ func (m *StringInt64Map) UnmarshalJSON(data []byte) error {
 
 	*m = mp
 	return nil
+}
+
+//JSONMarshal the function of packing with the processing of HTML tags.
+func JSONMarshal(t interface{}) ([]byte, error) {
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(t)
+	return buffer.Bytes(), err
 }

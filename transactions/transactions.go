@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"encoding/binary"
 	"encoding/hex"
+	"fmt"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
-	"github.com/pkg/errors"
 )
 
 //RefBlockNum function returns blockNumber
@@ -19,20 +19,20 @@ func RefBlockPrefix(blockID string) (types.UInt32, error) {
 	// Block ID is hex-encoded.
 	rawBlockID, err := hex.DecodeString(blockID)
 	if err != nil {
-		return 0, errors.Wrapf(err, "networkbroadcast: failed to decode block ID: %v", blockID)
+		return 0, fmt.Errorf("networkbroadcast: failed to decode block ID: %v \n Error : %w", blockID, err)
 	}
 
 	// Raw prefix = raw block ID [4:8].
 	// Make sure we don't trigger a slice bounds out of range panic.
 	if len(rawBlockID) < 8 {
-		return 0, errors.Errorf("networkbroadcast: invalid block ID: %v", blockID)
+		return 0, fmt.Errorf("networkbroadcast: invalid block ID: %v", blockID)
 	}
 	rawPrefix := rawBlockID[4:8]
 
 	// Decode the prefix.
 	var prefix uint32
 	if err := binary.Read(bytes.NewReader(rawPrefix), binary.LittleEndian, &prefix); err != nil {
-		return 0, errors.Wrapf(err, "networkbroadcast: failed to read block prefix: %v", rawPrefix)
+		return 0, fmt.Errorf("networkbroadcast: failed to read block prefix: %v \n Error : %w", rawPrefix, err)
 	}
 
 	// Done, return the prefix.

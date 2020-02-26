@@ -1,25 +1,17 @@
-package client
+package viz
 
 import (
 	"time"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/api"
+	"github.com/VIZ-Blockchain/viz-go-lib/operations"
 	"github.com/VIZ-Blockchain/viz-go-lib/transactions"
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
-//BResp of response when sending a transaction.
-type BResp struct {
-	ID       string
-	BlockNum int32
-	TrxNum   int32
-	Expired  bool
-	JSONTrx  string
-}
-
 //SendTrx generates and sends an array of transactions to VIZ.
-func (client *Client) SendTrx(strx []types.Operation) (*BResp, error) {
-	var bresp BResp
+func (client *Client) SendTrx(username string, strx []operations.Operation) (*types.OperationResponse, error) {
+	var bresp types.OperationResponse
 
 	// Getting the necessary parameters
 	props, err := client.API.GetDynamicGlobalProperties()
@@ -32,7 +24,7 @@ func (client *Client) SendTrx(strx []types.Operation) (*BResp, error) {
 	if err != nil {
 		return nil, err
 	}
-	tx := transactions.NewSignedTransaction(&types.Transaction{
+	tx := transactions.NewSignedTransaction(&operations.Transaction{
 		RefBlockNum:    transactions.RefBlockNum(props.HeadBlockNumber),
 		RefBlockPrefix: refBlockPrefix,
 	})
@@ -55,13 +47,13 @@ func (client *Client) SendTrx(strx []types.Operation) (*BResp, error) {
 	}
 
 	// Sign the transaction
-	if err := tx.Sign(privKeys, client.chainID); err != nil {
+	if err := tx.Sign(privKeys, client.Config.ChainID); err != nil {
 		return nil, err
 	}
 
 	// Sending a transaction
 	var resp *api.BroadcastResponse
-	if client.AsyncProtocol {
+	if client.asyncProtocol {
 		err = client.API.BroadcastTransaction(tx.Transaction)
 	} else {
 		resp, err = client.API.BroadcastTransactionSynchronous(tx.Transaction)
@@ -72,7 +64,7 @@ func (client *Client) SendTrx(strx []types.Operation) (*BResp, error) {
 	if err != nil {
 		return &bresp, err
 	}
-	if resp != nil && !client.AsyncProtocol {
+	if resp != nil && !client.asyncProtocol {
 		bresp.ID = resp.ID
 		bresp.BlockNum = resp.BlockNum
 		bresp.TrxNum = resp.TrxNum
@@ -84,7 +76,7 @@ func (client *Client) SendTrx(strx []types.Operation) (*BResp, error) {
 	return &bresp, nil
 }
 
-func (client *Client) GetTrx(strx []types.Operation) (*types.Transaction, error) {
+func (client *Client) GetTrx(strx []operations.Operation) (*operations.Transaction, error) {
 	// Getting the necessary parameters
 	props, err := client.API.GetDynamicGlobalProperties()
 	if err != nil {
@@ -96,7 +88,7 @@ func (client *Client) GetTrx(strx []types.Operation) (*types.Transaction, error)
 	if err != nil {
 		return nil, err
 	}
-	tx := &types.Transaction{
+	tx := &operations.Transaction{
 		RefBlockNum:    transactions.RefBlockNum(props.HeadBlockNumber),
 		RefBlockPrefix: refBlockPrefix,
 	}

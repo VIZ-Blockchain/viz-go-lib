@@ -1,36 +1,24 @@
-package client
+package viz
 
 import (
-	"strconv"
-
+	"github.com/VIZ-Blockchain/viz-go-lib/operations"
 	"github.com/VIZ-Blockchain/viz-go-lib/transactions"
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
+//SetAsyncProtocol enables or disables the asynchronous operation protocol
+func (client *Client) SetAsyncProtocol(value bool) {
+	client.asyncProtocol = value
+}
+
+//SetKeys you can specify keys for signing transactions.
+func (client *Client) SetKeys(keys *Keys) {
+	client.CurrentKeys = keys
+}
+
 //SetAsset returns data of type Asset
 func SetAsset(amount float64, symbol string) *types.Asset {
 	return &types.Asset{Amount: amount, Symbol: symbol}
-}
-
-//PerMvest returns the ratio of TotalVersingFund to TotalVestingShares.
-func (client *Client) PerMvest() (float64, error) {
-	dgp, errdgp := client.API.GetDynamicGlobalProperties()
-	if errdgp != nil {
-		return 0, errdgp
-	}
-
-	tvfs := dgp.TotalVersingFund.Amount
-	tvs := dgp.TotalVestingShares.Amount
-
-	spmtmp := (tvfs / tvs) * 1000000
-
-	str := strconv.FormatFloat(spmtmp, 'f', 3, 64)
-	spm, errspm := strconv.ParseFloat(str, 64)
-	if errspm != nil {
-		return 0, errspm
-	}
-
-	return spm, nil
 }
 
 //JSONTrxString generate Trx to String
@@ -43,8 +31,8 @@ func JSONTrxString(v *transactions.SignedTransaction) (string, error) {
 }
 
 //JSONOpString generate Operations to String
-func JSONOpString(v []types.Operation) (string, error) {
-	var tx types.Operations
+func JSONOpString(v []operations.Operation) (string, error) {
+	var tx operations.Operations
 
 	tx = append(tx, v...)
 
@@ -56,11 +44,11 @@ func JSONOpString(v []types.Operation) (string, error) {
 }
 
 //GenerateProposalOperation generate []Operation to ProposalOperations
-func GenerateProposalOperation(ops []types.Operation) types.ProposalObjects {
-	var ans types.ProposalObjects
+func GenerateProposalOperation(ops []operations.Operation) operations.ProposalObjects {
+	var ans operations.ProposalObjects
 
 	for _, val := range ops {
-		ans = append(ans, types.ProposalObject{Operation: val, OperationType: val.Type()})
+		ans = append(ans, operations.ProposalObject{Operation: val, OperationType: val.Type()})
 	}
 
 	return ans

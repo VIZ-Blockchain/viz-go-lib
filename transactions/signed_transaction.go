@@ -6,20 +6,21 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"time"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/VIZ-Blockchain/viz-go-lib/operations"
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
-	"github.com/pkg/errors"
 )
 
 //SignedTransaction structure of a signed transaction
 type SignedTransaction struct {
-	*types.Transaction
+	*operations.Transaction
 }
 
 //NewSignedTransaction initialization of a new signed transaction
-func NewSignedTransaction(tx *types.Transaction) *SignedTransaction {
+func NewSignedTransaction(tx *operations.Transaction) *SignedTransaction {
 	if tx.Expiration == nil {
 		expiration := time.Now().Add(30 * time.Second).UTC()
 		tx.Expiration = &types.Time{Time: &expiration}
@@ -46,11 +47,11 @@ func (tx *SignedTransaction) Digest(chain string) ([]byte, error) {
 	// Write the chain ID.
 	rawChainID, err := hex.DecodeString(chain)
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to decode chain ID: %v", chain)
+		return nil, fmt.Errorf("failed to decode chain ID: %v \n Error : %w", chain, err)
 	}
 
 	if _, err := msgBuffer.Write(rawChainID); err != nil {
-		return nil, errors.Wrap(err, "failed to write chain ID")
+		return nil, fmt.Errorf("failed to write chain ID : %w", err)
 	}
 
 	// Write the serialized transaction.
@@ -60,7 +61,7 @@ func (tx *SignedTransaction) Digest(chain string) ([]byte, error) {
 	}
 
 	if _, err := msgBuffer.Write(rawTx); err != nil {
-		return nil, errors.Wrap(err, "failed to write serialized transaction")
+		return nil, fmt.Errorf("failed to write serialized transaction : %w", err)
 	}
 
 	// Compute the digest.

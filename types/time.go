@@ -1,8 +1,10 @@
 package types
 
 import (
+	// Stdlib
 	"time"
 
+	// RPC
 	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
 )
 
@@ -20,21 +22,6 @@ func (t *Time) MarshalJSON() ([]byte, error) {
 
 //UnmarshalJSON unpacking the JSON parameter in the Time type.
 func (t *Time) UnmarshalJSON(data []byte) error {
-	parsed, err := time.ParseInLocation(layout, string(data), time.UTC)
-	if err != nil {
-		return err
-	}
-	t.Time = &parsed
-	return nil
-}
-
-//GobEncode function for packing the Time type in gob.
-func (t *Time) GobEncode() ([]byte, error) {
-	return []byte(t.Time.Format(layout)), nil
-}
-
-//GobDecode unpacking the gob parameter in the Time type.
-func (t *Time) GobDecode(data []byte) error {
 	parsed, err := time.ParseInLocation(layout, string(data), time.UTC)
 	if err != nil {
 		return err

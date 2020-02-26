@@ -38,30 +38,6 @@ func (op *Asset) MarshalJSON() ([]byte, error) {
 	return json.Marshal(op.String())
 }
 
-//GobDecode unpacking the gob parameter in the Asset type.
-func (op *Asset) GobDecode(data []byte) error {
-	str, errUnq := strconv.Unquote(string(data))
-	if errUnq != nil {
-		return errUnq
-	}
-	param := strings.Split(str, " ")
-
-	s, errpf := strconv.ParseFloat(param[0], 64)
-	if errpf != nil {
-		return errpf
-	}
-
-	op.Amount = s
-	op.Symbol = param[1]
-
-	return nil
-}
-
-//GobEncode function for packing the Asset type in gob.
-func (op *Asset) GobEncode() ([]byte, error) {
-	return json.Marshal(op.String())
-}
-
 //MarshalTransaction is a function of converting type Asset to bytes.
 func (op *Asset) MarshalTransaction(encoder *transaction.Encoder) error {
 	ans, err := json.Marshal(op)
@@ -79,7 +55,7 @@ func (op *Asset) MarshalTransaction(encoder *transaction.Encoder) error {
 //String function convert type Asset to string.
 func (op *Asset) String() string {
 	var ammf string
-	if op.Symbol != "SHARES" {
+	if op.Symbol != "GESTS" {
 		ammf = strconv.FormatFloat(op.Amount, 'f', 3, 64)
 	} else {
 		ammf = strconv.FormatFloat(op.Amount, 'f', 6, 64)

@@ -1,6 +1,7 @@
 package wif
 
 import (
+	// Stdlib
 	"encoding/hex"
 	"testing"
 )
