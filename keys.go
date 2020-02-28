@@ -23,26 +23,17 @@ type Keys struct {
 
 func init() {
 	OpTypeKey["vote"] = []string{"regular"}
-	OpTypeKey["comment"] = []string{"regular"}
+	OpTypeKey["content"] = []string{"regular"}
 	OpTypeKey["transfer"] = []string{"active"}
 	OpTypeKey["transfer_to_vesting"] = []string{"active"}
 	OpTypeKey["withdraw_vesting"] = []string{"active"}
-	OpTypeKey["limit_order_create"] = []string{"active"}
-	OpTypeKey["limit_order_cancel"] = []string{"active"}
-	OpTypeKey["feed_publish"] = []string{"active"}
-	OpTypeKey["convert"] = []string{"active"}
-	OpTypeKey["account_create"] = []string{"active"}
 	OpTypeKey["account_update"] = []string{"active"}
 	OpTypeKey["witness_update"] = []string{"active"}
 	OpTypeKey["account_witness_vote"] = []string{"regular"}
 	OpTypeKey["account_witness_proxy"] = []string{"regular"}
-	OpTypeKey["delete_comment"] = []string{"regular"}
-	OpTypeKey["custom_json"] = []string{"regular"}
-	OpTypeKey["comment_options"] = []string{"regular"}
+	OpTypeKey["delete_content"] = []string{"regular"}
+	OpTypeKey["custom"] = []string{"regular"}
 	OpTypeKey["set_withdraw_vesting_route"] = []string{"active"}
-	OpTypeKey["limit_order_create2"] = []string{"active"}
-	OpTypeKey["challenge_authority"] = []string{"master"}
-	OpTypeKey["prove_authority"] = []string{"active"}
 	OpTypeKey["request_account_recovery"] = []string{"active"}
 	OpTypeKey["recover_account"] = []string{"master"}
 	OpTypeKey["change_recovery_account"] = []string{"master"}
@@ -50,26 +41,26 @@ func init() {
 	OpTypeKey["escrow_dispute"] = []string{"active"}
 	OpTypeKey["escrow_release"] = []string{"active"}
 	OpTypeKey["escrow_approve"] = []string{"active"}
-	OpTypeKey["transfer_to_savings"] = []string{"active"}
-	OpTypeKey["transfer_from_savings"] = []string{"active"}
-	OpTypeKey["cancel_transfer_from_savings"] = []string{"active"}
-	OpTypeKey["decline_voting_rights"] = []string{"master"}
-	OpTypeKey["reset_account"] = []string{"active"}
-	OpTypeKey["set_reset_account"] = []string{"active"}
 	OpTypeKey["delegate_vesting_shares"] = []string{"active"}
-	OpTypeKey["account_create_with_delegation"] = []string{"active"}
+	OpTypeKey["account_create"] = []string{"active"}
 	OpTypeKey["account_metadata"] = []string{"regular"}
 	OpTypeKey["proposal_create"] = []string{"active"}
-	OpTypeKey["proposal_update"] = []string{"active"}
+	OpTypeKey["proposal_update"] = []string{"regular"}
 	OpTypeKey["proposal_delete"] = []string{"active"}
 	OpTypeKey["chain_properties_update"] = []string{"active"}
-	OpTypeKey["break_free_referral"] = []string{"active"}
-	OpTypeKey["delegate_vesting_shares_with_interest"] = []string{"active"}
-	OpTypeKey["reject_vesting_shares_delegation"] = []string{"active"}
-	OpTypeKey["transit_to_cyberway"] = []string{"active"}
-	OpTypeKey["worker_request"] = []string{"active"}
-	OpTypeKey["worker_request_delete"] = []string{"active"}
-	OpTypeKey["worker_request_vote"] = []string{"active"}
+	OpTypeKey["committee_worker_create_request"] = []string{"regular"}
+	OpTypeKey["committee_worker_cancel_request"] = []string{"regular"}
+	OpTypeKey["committee_vote_request"] = []string{"regular"}
+	OpTypeKey["create_invite"] = []string{"active"}
+	OpTypeKey["claim_invite_balance"] = []string{"active"}
+	OpTypeKey["invite_registration"] = []string{"active"}
+	OpTypeKey["versioned_chain_properties_update"] = []string{"active"}
+	OpTypeKey["award"] = []string{"regular"}
+	OpTypeKey["set_paid_subscription"] = []string{"active"}
+	OpTypeKey["paid_subscribe"] = []string{"active"}
+	OpTypeKey["set_account_price"] = []string{"master"}
+	OpTypeKey["set_subaccount_price"] = []string{"master"}
+	OpTypeKey["buy_account"] = []string{"active"}
 }
 
 //SigningKeys returns the key from the CurrentKeys
