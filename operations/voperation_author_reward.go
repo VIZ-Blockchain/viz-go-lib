@@ -8,8 +8,7 @@ import (
 type AuthorRewardOperation struct {
 	Author        string      `json:"author"`
 	Permlink      string      `json:"permlink"`
-	SbdPayout     types.Asset `json:"sbd_payout"`
-	SteemPayout   types.Asset `json:"steem_payout"`
+	TokenPayout   types.Asset `json:"token_payout"`
 	VestingPayout types.Asset `json:"vesting_payout"`
 }
 

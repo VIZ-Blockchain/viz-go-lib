@@ -7,10 +7,10 @@ import (
 
 //RecoverAccountOperation represents recover_account operation data.
 type RecoverAccountOperation struct {
-	AccountToRecover     string          `json:"account_to_recover"`
-	NewOwnerAuthority    types.Authority `json:"new_owner_authority"`
-	RecentOwnerAuthority types.Authority `json:"recent_owner_authority"`
-	Extensions           []interface{}   `json:"extensions"`
+	AccountToRecover      string          `json:"account_to_recover"`
+	NewMasterAuthority    types.Authority `json:"new_master_authority"`
+	RecentMasterAuthority types.Authority `json:"recent_master_authority"`
+	Extensions            []interface{}   `json:"extensions"`
 }
 
 //Type function that defines the type of operation RecoverAccountOperation.
@@ -28,8 +28,8 @@ func (op *RecoverAccountOperation) MarshalTransaction(encoder *transaction.Encod
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeRecoverAccount.Code()))
 	enc.Encode(op.AccountToRecover)
-	enc.Encode(op.NewOwnerAuthority)
-	enc.Encode(op.RecentOwnerAuthority)
+	enc.Encode(op.NewMasterAuthority)
+	enc.Encode(op.RecentMasterAuthority)
 	//enc.Encode(op.Extensions)
 	enc.Encode(byte(0))
 	return enc.Err()

@@ -10,10 +10,10 @@ type ProposalUpdateOperation struct {
 	Title                    string        `json:"title"`
 	ActiveApprovalsToAdd     []string      `json:"active_approvals_to_add"`
 	ActiveApprovalsToRemove  []string      `json:"active_approvals_to_remove"`
-	OwnerApprovalsToAdd      []string      `json:"owner_approvals_to_add"`
-	OwnerApprovalsToRemove   []string      `json:"owner_approvals_to_remove"`
-	PostingApprovalsToAdd    []string      `json:"posting_approvals_to_add"`
-	PostingApprovalsToRemove []string      `json:"posting_approvals_to_remove"`
+	MasterApprovalsToAdd     []string      `json:"master_approvals_to_add"`
+	MasterApprovalsToRemove  []string      `json:"master_approvals_to_remove"`
+	RegularApprovalsToAdd    []string      `json:"regular_approvals_to_add"`
+	RegularApprovalsToRemove []string      `json:"regular_approvals_to_remove"`
 	KeyApprovalsToAdd        []string      `json:"key_approvals_to_add"`
 	KeyApprovalsToRemove     []string      `json:"key_approvals_to_remove"`
 	Extensions               []interface{} `json:"extensions"`
@@ -37,10 +37,10 @@ func (op *ProposalUpdateOperation) MarshalTransaction(encoder *transaction.Encod
 	enc.Encode(op.Title)
 	enc.EncodeArrString(op.ActiveApprovalsToAdd)
 	enc.EncodeArrString(op.ActiveApprovalsToRemove)
-	enc.EncodeArrString(op.OwnerApprovalsToAdd)
-	enc.EncodeArrString(op.OwnerApprovalsToRemove)
-	enc.EncodeArrString(op.PostingApprovalsToAdd)
-	enc.EncodeArrString(op.PostingApprovalsToRemove)
+	enc.EncodeArrString(op.MasterApprovalsToAdd)
+	enc.EncodeArrString(op.MasterApprovalsToRemove)
+	enc.EncodeArrString(op.RegularApprovalsToAdd)
+	enc.EncodeArrString(op.RegularApprovalsToRemove)
 	enc.EncodeArrString(op.KeyApprovalsToAdd)
 	enc.EncodeArrString(op.KeyApprovalsToRemove)
 	//enc.Encode(op.Extensions)

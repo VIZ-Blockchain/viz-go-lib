@@ -1,16 +1,14 @@
 package operations
 
 import (
-	"encoding/json"
-
 	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
 //ChainPropertiesUpdateOperation represents chain_properties_update operation data.
 type ChainPropertiesUpdateOperation struct {
-	Owner string        `json:"owner"`
-	Props []interface{} `json:"props"`
+	Owner string                   `json:"owner"`
+	Props types.ChainPropertiesOLD `json:"props"`
 }
 
 //Type function that defines the type of operation ChainPropertiesUpdateOperation.
@@ -28,10 +26,6 @@ func (op *ChainPropertiesUpdateOperation) MarshalTransaction(encoder *transactio
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeChainPropertiesUpdate.Code()))
 	enc.Encode(op.Owner)
-	enc.Encode(byte(2))
-	z, _ := json.Marshal(op.Props[1])
-	var d types.ChainProperties
-	_ = json.Unmarshal(z, &d)
-	enc.Encode(&d)
+	enc.Encode(op.Props)
 	return enc.Err()
 }

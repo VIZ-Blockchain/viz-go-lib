@@ -7,10 +7,10 @@ import (
 
 //RequestAccountRecoveryOperation represents request_account_recovery operation data.
 type RequestAccountRecoveryOperation struct {
-	RecoveryAccount   string          `json:"recovery_account"`
-	AccountToRecover  string          `json:"account_to_recover"`
-	NewOwnerAuthority types.Authority `json:"new_owner_authority"`
-	Extensions        []interface{}   `json:"extensions"`
+	RecoveryAccount    string          `json:"recovery_account"`
+	AccountToRecover   string          `json:"account_to_recover"`
+	NewMasterAuthority types.Authority `json:"new_master_authority"`
+	Extensions         []interface{}   `json:"extensions"`
 }
 
 //Type function that defines the type of operation RequestAccountRecoveryOperation.
@@ -29,7 +29,7 @@ func (op *RequestAccountRecoveryOperation) MarshalTransaction(encoder *transacti
 	enc.EncodeUVarint(uint64(TypeRequestAccountRecovery.Code()))
 	enc.Encode(op.RecoveryAccount)
 	enc.Encode(op.AccountToRecover)
-	enc.Encode(op.NewOwnerAuthority)
+	enc.Encode(op.NewMasterAuthority)
 	//enc.Encode(op.Extensions)
 	enc.Encode(byte(0))
 	return enc.Err()

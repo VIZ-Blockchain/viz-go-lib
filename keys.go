@@ -22,8 +22,8 @@ type Keys struct {
 }
 
 func init() {
-	OpTypeKey["vote"] = []string{"posting"}
-	OpTypeKey["comment"] = []string{"posting"}
+	OpTypeKey["vote"] = []string{"regular"}
+	OpTypeKey["comment"] = []string{"regular"}
 	OpTypeKey["transfer"] = []string{"active"}
 	OpTypeKey["transfer_to_vesting"] = []string{"active"}
 	OpTypeKey["withdraw_vesting"] = []string{"active"}
@@ -34,18 +34,18 @@ func init() {
 	OpTypeKey["account_create"] = []string{"active"}
 	OpTypeKey["account_update"] = []string{"active"}
 	OpTypeKey["witness_update"] = []string{"active"}
-	OpTypeKey["account_witness_vote"] = []string{"posting"}
-	OpTypeKey["account_witness_proxy"] = []string{"posting"}
-	OpTypeKey["delete_comment"] = []string{"posting"}
-	OpTypeKey["custom_json"] = []string{"posting"}
-	OpTypeKey["comment_options"] = []string{"posting"}
+	OpTypeKey["account_witness_vote"] = []string{"regular"}
+	OpTypeKey["account_witness_proxy"] = []string{"regular"}
+	OpTypeKey["delete_comment"] = []string{"regular"}
+	OpTypeKey["custom_json"] = []string{"regular"}
+	OpTypeKey["comment_options"] = []string{"regular"}
 	OpTypeKey["set_withdraw_vesting_route"] = []string{"active"}
 	OpTypeKey["limit_order_create2"] = []string{"active"}
-	OpTypeKey["challenge_authority"] = []string{"owner"}
+	OpTypeKey["challenge_authority"] = []string{"master"}
 	OpTypeKey["prove_authority"] = []string{"active"}
 	OpTypeKey["request_account_recovery"] = []string{"active"}
-	OpTypeKey["recover_account"] = []string{"owner"}
-	OpTypeKey["change_recovery_account"] = []string{"owner"}
+	OpTypeKey["recover_account"] = []string{"master"}
+	OpTypeKey["change_recovery_account"] = []string{"master"}
 	OpTypeKey["escrow_transfer"] = []string{"active"}
 	OpTypeKey["escrow_dispute"] = []string{"active"}
 	OpTypeKey["escrow_release"] = []string{"active"}
@@ -53,12 +53,12 @@ func init() {
 	OpTypeKey["transfer_to_savings"] = []string{"active"}
 	OpTypeKey["transfer_from_savings"] = []string{"active"}
 	OpTypeKey["cancel_transfer_from_savings"] = []string{"active"}
-	OpTypeKey["decline_voting_rights"] = []string{"owner"}
+	OpTypeKey["decline_voting_rights"] = []string{"master"}
 	OpTypeKey["reset_account"] = []string{"active"}
 	OpTypeKey["set_reset_account"] = []string{"active"}
 	OpTypeKey["delegate_vesting_shares"] = []string{"active"}
 	OpTypeKey["account_create_with_delegation"] = []string{"active"}
-	OpTypeKey["account_metadata"] = []string{"posting"}
+	OpTypeKey["account_metadata"] = []string{"regular"}
 	OpTypeKey["proposal_create"] = []string{"active"}
 	OpTypeKey["proposal_update"] = []string{"active"}
 	OpTypeKey["proposal_delete"] = []string{"active"}
@@ -83,11 +83,11 @@ func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 	opKeys := OpTypeKey[trx.Type()]
 	for _, val := range opKeys {
 		switch val {
-		case "posting":
+		case "regular":
 			for _, keyStr := range client.CurrentKeys.PKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
-					return nil, errors.New("error decode Posting Key: " + err.Error())
+					return nil, errors.New("error decode Regular Key: " + err.Error())
 				}
 				keys = append(keys, privKey)
 			}
@@ -99,11 +99,11 @@ func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 				}
 				keys = append(keys, privKey)
 			}
-		case "owner":
+		case "master":
 			for _, keyStr := range client.CurrentKeys.OKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
-					return nil, errors.New("error decode Owner Key: " + err.Error())
+					return nil, errors.New("error decode Master Key: " + err.Error())
 				}
 				keys = append(keys, privKey)
 			}

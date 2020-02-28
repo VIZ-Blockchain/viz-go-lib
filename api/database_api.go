@@ -2,26 +2,13 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/operations"
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
 //database_api
-
-//GetAccountBandwidth displays user actions based on type
-/*
-bandwidthType:
-post = 0
-forum = 1
-market = 2
-custom_json = 3
-*/
-func (api *API) GetAccountBandwidth(accountName string, bandwidthType uint32) (*Bandwidth, error) {
-	var resp Bandwidth
-	err := api.call("database_api", "get_account_bandwidth", []interface{}{accountName, bandwidthType}, &resp)
-	return &resp, err
-}
 
 //GetAccountCount returns the number of registered users.
 func (api *API) GetAccountCount() (*uint64, error) {
@@ -67,13 +54,6 @@ func (api *API) GetConfig() (*Config, error) {
 	return &resp, err
 }
 
-//GetConversionRequests api request get_conversion_requests
-func (api *API) GetConversionRequests(accountName string) ([]*ConversionRequests, error) {
-	var resp []*ConversionRequests
-	err := api.call("database_api", "get_conversion_requests", []string{accountName}, &resp)
-	return resp, err
-}
-
 //GetDatabaseInfo api request get_database_info
 func (api *API) GetDatabaseInfo() (*DatabaseInfo, error) {
 	var resp DatabaseInfo
@@ -102,7 +82,11 @@ func (api *API) GetExpiringVestingDelegations(account string, from types.Time, l
 	case 0:
 		params = append(params, 100)
 	default:
-		params = append(params, limit[0])
+		lm := limit[0]
+		if lm > 1000 {
+			return nil, errors.New("database_api: get_expiring_vesting_delegations -> limit must not exceed 1000")
+		}
+		params = append(params, lm)
 	}
 	var resp []*VestingDelegationExpiration
 	err := api.call("database_api", "get_expiring_vesting_delegations", params, &resp)
@@ -123,10 +107,10 @@ func (api *API) GetNextScheduledHardfork() (*NextScheduledHardfork, error) {
 	return &resp, err
 }
 
-//GetOwnerHistory api request get_owner_history
-func (api *API) GetOwnerHistory(accountName string) ([]*OwnerHistory, error) {
-	var resp []*OwnerHistory
-	err := api.call("database_api", "get_owner_history", []interface{}{accountName}, &resp)
+//GetMasterHistory api request get_master_history
+func (api *API) GetMasterHistory(accountName string) ([]*MasterHistory, error) {
+	var resp []*MasterHistory
+	err := api.call("database_api", "get_master_history", []interface{}{accountName}, &resp)
 	return resp, err
 }
 
@@ -158,20 +142,6 @@ func (api *API) GetRequiredSignatures(trx *operations.Transaction, keys ...strin
 	return resp, err
 }
 
-//GetSavingsWithdrawFrom api request get_savings_withdraw_from
-func (api *API) GetSavingsWithdrawFrom(accountName string) ([]*SavingsWithdraw, error) {
-	var resp []*SavingsWithdraw
-	err := api.call("database_api", "get_savings_withdraw_from", []interface{}{accountName}, &resp)
-	return resp, err
-}
-
-//GetSavingsWithdrawTo api request get_savings_withdraw_to
-func (api *API) GetSavingsWithdrawTo(accountName string) ([]*SavingsWithdraw, error) {
-	var resp []*SavingsWithdraw
-	err := api.call("database_api", "get_savings_withdraw_to", []interface{}{accountName}, &resp)
-	return resp, err
-}
-
 //GetTransactionHex api request get_transaction_hex
 func (api *API) GetTransactionHex(trx *operations.Transaction) (*string, error) {
 	var resp string
@@ -189,7 +159,11 @@ func (api *API) GetVestingDelegations(account, from, dtype string, limit ...uint
 	case 0:
 		params = append(params, 100)
 	default:
-		params = append(params, limit[0])
+		lm := limit[0]
+		if lm > 1000 {
+			return nil, errors.New("database_api: get_vesting_delegations -> limit must not exceed 1000")
+		}
+		params = append(params, lm)
 	}
 	params = append(params, dtype)
 	var resp []*VestingDelegation
@@ -236,6 +210,26 @@ func (api *API) GetVerifyAuthority(trx *operations.Transaction) (*bool, error) {
 	var resp bool
 	err := api.call("database_api", "verify_authority", []interface{}{&trx}, &resp)
 	return &resp, err
+}
+
+//GetAccountsOnSale api request get_accounts_on_sale
+func (api *API) GetAccountsOnSale(from, limit uint32) ([]*AccountOnSale, error) {
+	if limit > 1000 {
+		return nil, errors.New("database_api: get_accounts_on_sale -> limit must not exceed 1000")
+	}
+	var resp []*AccountOnSale
+	err := api.call("database_api", "get_accounts_on_sale", []interface{}{from, limit}, &resp)
+	return resp, err
+}
+
+//GetSubAccountsOnSale api request get_subaccounts_on_sale
+func (api *API) GetSubAccountsOnSale(from, limit uint32) ([]*SubAccountOnSale, error) {
+	if limit > 1000 {
+		return nil, errors.New("database_api: get_subaccounts_on_sale -> limit must not exceed 1000")
+	}
+	var resp []*SubAccountOnSale
+	err := api.call("database_api", "get_subaccounts_on_sale", []interface{}{from, limit}, &resp)
+	return resp, err
 }
 
 // Set callback to invoke as soon as a new block is applied

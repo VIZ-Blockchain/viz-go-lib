@@ -6,17 +6,18 @@ import (
 
 //CustomOperation represents custom operation data.
 type CustomOperation struct {
-	RequiredAuths []string `json:"required_auths"`
-	ID            uint16   `json:"id"`
-	Datas         []byte   `json:"data"`
+	RequiredActiveAuths  []string `json:"required_active_auths"`
+	RequiredRegularAuths []string `json:"required_regular_auths"`
+	ID                   string   `json:"id"`
+	JSON                 string   `json:"json"`
 }
 
-//Type function that defines the type of operation CustomOperation.
+//Type function that defines the type of operation.
 func (op *CustomOperation) Type() OpType {
 	return TypeCustom
 }
 
-//Data returns the operation data CustomOperation.
+//Data returns the operation data.
 func (op *CustomOperation) Data() interface{} {
 	return op
 }
@@ -25,8 +26,9 @@ func (op *CustomOperation) Data() interface{} {
 func (op *CustomOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeCustom.Code()))
-	enc.Encode(op.RequiredAuths)
+	enc.EncodeArrString(op.RequiredActiveAuths)
+	enc.EncodeArrString(op.RequiredRegularAuths)
 	enc.Encode(op.ID)
-	enc.Encode(op.Datas)
+	enc.Encode(op.JSON)
 	return enc.Err()
 }

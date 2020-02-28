@@ -10,80 +10,64 @@ import (
 // dataObjects keeps mapping operation type -> operation data object.
 // This is used later on to unmarshal operation data based on the operation type.
 var dataObjects = map[OpType]Operation{
-	TypeVote:                              &VoteOperation{},
-	TypeComment:                           &CommentOperation{},
-	TypeTransfer:                          &TransferOperation{},
-	TypeTransferToVesting:                 &TransferToVestingOperation{},
-	TypeWithdrawVesting:                   &WithdrawVestingOperation{},
-	TypeLimitOrderCreate:                  &LimitOrderCreateOperation{},
-	TypeLimitOrderCancel:                  &LimitOrderCancelOperation{},
-	TypeFeedPublish:                       &FeedPublishOperation{},
-	TypeConvert:                           &ConvertOperation{},
-	TypeAccountCreate:                     &AccountCreateOperation{},
-	TypeAccountUpdate:                     &AccountUpdateOperation{},
-	TypeWitnessUpdate:                     &WitnessUpdateOperation{},
-	TypeAccountWitnessVote:                &AccountWitnessVoteOperation{},
-	TypeAccountWitnessProxy:               &AccountWitnessProxyOperation{},
-	TypePOW:                               &POWOperation{},
-	TypeCustom:                            &CustomOperation{},
-	TypeReportOverProduction:              &ReportOverProductionOperation{},
-	TypeDeleteComment:                     &DeleteCommentOperation{},
-	TypeCustomJSON:                        &CustomJSONOperation{},
-	TypeCommentOptions:                    &CommentOptionsOperation{},
-	TypeSetWithdrawVestingRoute:           &SetWithdrawVestingRouteOperation{},
-	TypeLimitOrderCreate2:                 &LimitOrderCreate2Operation{},
-	TypeChallengeAuthority:                &ChallengeAuthorityOperation{},
-	TypeProveAuthority:                    &ProveAuthorityOperation{},
-	TypeRequestAccountRecovery:            &RequestAccountRecoveryOperation{},
-	TypeRecoverAccount:                    &RecoverAccountOperation{},
-	TypeChangeRecoveryAccount:             &ChangeRecoveryAccountOperation{},
-	TypeEscrowTransfer:                    &EscrowTransferOperation{},
-	TypeEscrowDispute:                     &EscrowDisputeOperation{},
-	TypeEscrowRelease:                     &EscrowReleaseOperation{},
-	TypePOW2:                              &POW2Operation{},
-	TypeEscrowApprove:                     &EscrowApproveOperation{},
-	TypeTransferToSavings:                 &TransferToSavingsOperation{},
-	TypeTransferFromSavings:               &TransferFromSavingsOperation{},
-	TypeCancelTransferFromSavings:         &CancelTransferFromSavingsOperation{},
-	TypeCustomBinary:                      &CustomBinaryOperation{},
-	TypeDeclineVotingRights:               &DeclineVotingRightsOperation{},
-	TypeResetAccount:                      &ResetAccountOperation{},
-	TypeSetResetAccount:                   &SetResetAccountOperation{},
-	TypeDelegateVestingShares:             &DelegateVestingSharesOperation{},
-	TypeAccountCreateWithDelegation:       &AccountCreateWithDelegationOperation{},
-	TypeAccountMetadata:                   &AccountMetadataOperation{},
-	TypeProposalCreate:                    &ProposalCreateOperation{},
-	TypeProposalUpdate:                    &ProposalUpdateOperation{},
-	TypeProposalDelete:                    &ProposalDeleteOperation{},
-	TypeChainPropertiesUpdate:             &ChainPropertiesUpdateOperation{},
-	TypeBreakFreeReferral:                 &BreakFreeReferralOperation{},
-	TypeDelegateVestingSharesWithInterest: &DelegateVestingSharesWithInterestOperation{},
-	TypeRejectVestingSharesDelegation:     &RejectVestingSharesDelegationOperation{},
-	TypeTransitToCyberway:                 &TransitToCyberwayOperation{},
-	TypeWorkerRequest:                     &WorkerRequestOperation{},
-	TypeWorkerRequestDelete:               &WorkerRequestDeleteOperation{},
-	TypeWorkerRequestVote:                 &WorkerRequestVoteOperation{},
-	TypeFillConvertRequest:                &FillConvertRequestOperation{}, //Virtual Operation
-	TypeAuthorReward:                      &AuthorRewardOperation{},
-	TypeCurationReward:                    &CurationRewardOperation{},
-	TypeCommentReward:                     &CommentRewardOperation{},
-	TypeLiquidityReward:                   &LiquidityRewardOperation{},
-	TypeInterest:                          &InterestOperation{},
-	TypeFillVestingWithdraw:               &FillVestingWithdrawOperation{},
-	TypeFillOrder:                         &FillOrderOperation{},
-	TypeShutdownWitness:                   &ShutdownWitnessOperation{},
-	TypeFillTransferFromSavings:           &FillTransferFromSavingsOperation{},
-	TypeHardfork:                          &HardforkOperation{},
-	TypeCommentPayoutUpdate:               &CommentPayoutUpdateOperation{},
-	TypeCommentBenefactorReward:           &CommentBenefactorRewardOperation{},
-	TypeReturnVestingDelegation:           &ReturnVestingDelegationOperation{},
-	TypeProducerRewardOperation:           &ProducerRewardOperationOperation{},
-	TypeDelegationReward:                  &DelegationRewardOperation{},
-	TypeAuctionWindowReward:               &AuctionWindowRewardOperation{},
-	TypeTotalCommentReward:                &TotalCommentRewardOperation{},
-	TypeWorkerReward:                      &WorkerRewardOperation{},
-	TypeWorkerState:                       &WorkerStateOperation{},
-	TypeConvertSbdDebt:                    &ConvertSbdDebtOperation{},
+	TypeVote:                           &VoteOperation{},
+	TypeContent:                        &ContentOperation{},
+	TypeTransfer:                       &TransferOperation{},
+	TypeTransferToVesting:              &TransferToVestingOperation{},
+	TypeWithdrawVesting:                &WithdrawVestingOperation{},
+	TypeAccountUpdate:                  &AccountUpdateOperation{},
+	TypeWitnessUpdate:                  &WitnessUpdateOperation{},
+	TypeAccountWitnessVote:             &AccountWitnessVoteOperation{},
+	TypeAccountWitnessProxy:            &AccountWitnessProxyOperation{},
+	TypeDeleteContent:                  &DeleteContentOperation{},
+	TypeCustom:                         &CustomOperation{},
+	TypeSetWithdrawVestingRoute:        &SetWithdrawVestingRouteOperation{},
+	TypeRequestAccountRecovery:         &RequestAccountRecoveryOperation{},
+	TypeRecoverAccount:                 &RecoverAccountOperation{},
+	TypeChangeRecoveryAccount:          &ChangeRecoveryAccountOperation{},
+	TypeEscrowTransfer:                 &EscrowTransferOperation{},
+	TypeEscrowDispute:                  &EscrowDisputeOperation{},
+	TypeEscrowRelease:                  &EscrowReleaseOperation{},
+	TypeEscrowApprove:                  &EscrowApproveOperation{},
+	TypeDelegateVestingShares:          &DelegateVestingSharesOperation{},
+	TypeAccountCreate:                  &AccountCreateOperation{},
+	TypeAccountMetadata:                &AccountMetadataOperation{},
+	TypeProposalCreate:                 &ProposalCreateOperation{},
+	TypeProposalUpdate:                 &ProposalUpdateOperation{},
+	TypeProposalDelete:                 &ProposalDeleteOperation{},
+	TypeChainPropertiesUpdate:          &ChainPropertiesUpdateOperation{},
+	TypeAuthorReward:                   &AuthorRewardOperation{},            //Virtual Operation
+	TypeCurationReward:                 &CurationRewardOperation{},          //Virtual Operation
+	TypeContentReward:                  &ContentRewardOperation{},           //Virtual Operation
+	TypeFillVestingWithdraw:            &FillVestingWithdrawOperation{},     //Virtual Operation
+	TypeShutdownWitness:                &ShutdownWitnessOperation{},         //Virtual Operation
+	TypeHardfork:                       &HardforkOperation{},                //Virtual Operation
+	TypeContentPayoutUpdate:            &ContentPayoutUpdateOperation{},     //Virtual Operation
+	TypeContentBenefactorReward:        &ContentBenefactorRewardOperation{}, //Virtual Operation
+	TypeReturnVestingDelegation:        &ReturnVestingDelegationOperation{}, //Virtual Operation
+	TypeCommitteeWorkerCreateRequest:   &CommitteeWorkerCreateRequestOperation{},
+	TypeCommitteeWorkerCancelRequest:   &CommitteeWorkerCancelRequestOperation{},
+	TypeCommitteeVoteRequest:           &CommitteeVoteRequestOperation{},
+	TypeCommitteeCancelRequest:         &CommitteeCancelRequestOperation{},  //Virtual Operation
+	TypeCommitteeApproveRequest:        &CommitteeApproveRequestOperation{}, //Virtual Operation
+	TypeCommitteePayoutRequest:         &CommitteePayoutRequestOperation{},  //Virtual Operation
+	TypeCommitteePayRequest:            &CommitteePayRequestOperation{},     //Virtual Operation
+	TypeWitnessReward:                  &WitnessRewardOperation{},           //Virtual Operation
+	TypeCreateInvite:                   &CreateInviteOperation{},
+	TypeClaimInviteBalance:             &ClaimInviteBalanceOperation{},
+	TypeInviteRegistration:             &InviteRegistrationOperation{},
+	TypeVersionedChainPropertiesUpdate: &VersionedChainPropertiesUpdateOperation{},
+	TypeAward:                          &AwardOperation{},
+	TypeReceiveAward:                   &ReceiveAwardOperation{},    //Virtual Operation
+	TypeBenefactorAward:                &BenefactorAwardOperation{}, //Virtual Operation
+	TypeSetPaidSubscription:            &SetPaidSubscriptionOperation{},
+	TypePaidSubscribe:                  &PaidSubscribeOperation{},
+	TypePaidSubscriptionAction:         &PaidSubscriptionActionOperation{}, //Virtual Operation
+	TypeCancelPaidSubscription:         &CancelPaidSubscriptionOperation{}, //Virtual Operation
+	TypeSetAccountPrice:                &SetAccountPriceOperation{},
+	TypeSetSubaccountPrice:             &SetSubaccountPriceOperation{},
+	TypeBuyAccount:                     &BuyAccountOperation{},
+	TypeAccountSale:                    &AccountSaleOperation{}, //Virtual Operation
 }
 
 // Operation represents an operation stored in a transaction.

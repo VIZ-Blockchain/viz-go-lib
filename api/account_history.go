@@ -13,8 +13,8 @@ import (
 //If from = -1, the last {limit + 1} elements of the history will be shown.
 //The limit parameter must not exceed from (exception from = -1), since the previous {from} elements of the history are displayed.
 func (api *API) GetAccountHistory(account string, from uint64, limit uint32) ([]*operations.OperationObject, error) {
-	if limit > 10000 {
-		return nil, errors.New("account_history: get_account_history -> limit must not exceed 10000")
+	if limit > 1000 {
+		return nil, errors.New("account_history: get_account_history -> limit must not exceed 1000")
 	}
 	if from == 0 {
 		return nil, errors.New("account_history: get_account_history -> from can not have the value 0")

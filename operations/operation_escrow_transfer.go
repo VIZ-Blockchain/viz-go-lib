@@ -11,8 +11,7 @@ type EscrowTransferOperation struct {
 	To                   string      `json:"to"`
 	Agent                string      `json:"agent"`
 	EscrowID             uint32      `json:"escrow_id"`
-	SbdAmount            types.Asset `json:"sbd_amount"`
-	SteemAmount          types.Asset `json:"steem_amount"`
+	TokenAmount          types.Asset `json:"token_amount"`
 	Fee                  types.Asset `json:"fee"`
 	RatificationDeadline types.Time  `json:"ratification_deadline"`
 	EscrowExpiration     types.Time  `json:"escrow_expiration"`
@@ -35,8 +34,7 @@ func (op *EscrowTransferOperation) MarshalTransaction(encoder *transaction.Encod
 	enc.EncodeUVarint(uint64(TypeEscrowTransfer.Code()))
 	enc.Encode(op.From)
 	enc.Encode(op.To)
-	enc.Encode(op.SbdAmount)
-	enc.Encode(op.SteemAmount)
+	enc.Encode(op.TokenAmount)
 	enc.Encode(op.EscrowID)
 	enc.Encode(op.Agent)
 	enc.Encode(op.Fee)

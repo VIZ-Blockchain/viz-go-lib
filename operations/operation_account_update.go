@@ -8,9 +8,9 @@ import (
 //AccountUpdateOperation represents account_update operation data.
 type AccountUpdateOperation struct {
 	Account      string           `json:"account"`
-	Owner        *types.Authority `json:"owner,omitempty"`
+	Master       *types.Authority `json:"master,omitempty"`
 	Active       *types.Authority `json:"active,omitempty"`
-	Posting      *types.Authority `json:"posting,omitempty"`
+	Regular      *types.Authority `json:"regular,omitempty"`
 	MemoKey      string           `json:"memo_key"`
 	JSONMetadata string           `json:"json_metadata"`
 }
@@ -30,9 +30,9 @@ func (op *AccountUpdateOperation) MarshalTransaction(encoder *transaction.Encode
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeAccountUpdate.Code()))
 	enc.EncodeString(op.Account)
-	if op.Owner != nil {
+	if op.Master != nil {
 		enc.Encode(byte(1))
-		enc.Encode(op.Owner)
+		enc.Encode(op.Master)
 	} else {
 		enc.Encode(byte(0))
 	}
@@ -42,9 +42,9 @@ func (op *AccountUpdateOperation) MarshalTransaction(encoder *transaction.Encode
 	} else {
 		enc.Encode(byte(0))
 	}
-	if op.Posting != nil {
+	if op.Regular != nil {
 		enc.Encode(byte(1))
-		enc.Encode(op.Posting)
+		enc.Encode(op.Regular)
 	} else {
 		enc.Encode(byte(0))
 	}

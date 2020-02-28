@@ -8,13 +8,16 @@ import (
 //AccountCreateOperation represents account_create operation data.
 type AccountCreateOperation struct {
 	Fee            types.Asset     `json:"fee"`
+	Delegation     types.Asset     `json:"delegation"`
 	Creator        string          `json:"creator"`
 	NewAccountName string          `json:"new_account_name"`
-	Owner          types.Authority `json:"owner"`
+	Master         types.Authority `json:"master"`
 	Active         types.Authority `json:"active"`
-	Posting        types.Authority `json:"posting"`
+	Regular        types.Authority `json:"regular"`
 	MemoKey        string          `json:"memo_key"`
 	JSONMetadata   string          `json:"json_metadata"`
+	Referrer       string          `json:"referrer"`
+	Extensions     []interface{}   `json:"extensions"`
 }
 
 //Type function that defines the type of operation AccountCreateOperation.
@@ -32,12 +35,16 @@ func (op *AccountCreateOperation) MarshalTransaction(encoder *transaction.Encode
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeAccountCreate.Code()))
 	enc.Encode(op.Fee)
-	enc.EncodeString(op.Creator)
-	enc.EncodeString(op.NewAccountName)
-	enc.Encode(op.Owner)
+	enc.Encode(op.Delegation)
+	enc.Encode(op.Creator)
+	enc.Encode(op.NewAccountName)
+	enc.Encode(op.Master)
 	enc.Encode(op.Active)
-	enc.Encode(op.Posting)
+	enc.Encode(op.Regular)
 	enc.EncodePubKey(op.MemoKey)
 	enc.Encode(op.JSONMetadata)
+	enc.Encode(op.Referrer)
+	//enc.Encode(op.Extensions)
+	enc.Encode(byte(0))
 	return enc.Err()
 }

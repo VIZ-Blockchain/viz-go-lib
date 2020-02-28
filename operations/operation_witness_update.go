@@ -2,16 +2,13 @@ package operations
 
 import (
 	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
 //WitnessUpdateOperation represents witness_update operation data.
 type WitnessUpdateOperation struct {
-	Owner           string                   `json:"owner"`
-	URL             string                   `json:"url"`
-	BlockSigningKey string                   `json:"block_signing_key"`
-	Props           types.ChainPropertiesOLD `json:"props"`
-	Fee             types.Asset              `json:"fee"`
+	Owner           string `json:"owner"`
+	URL             string `json:"url"`
+	BlockSigningKey string `json:"block_signing_key"`
 }
 
 //Type function that defines the type of operation WitnessUpdateOperation.
@@ -31,7 +28,5 @@ func (op *WitnessUpdateOperation) MarshalTransaction(encoder *transaction.Encode
 	enc.Encode(op.Owner)
 	enc.Encode(op.URL)
 	enc.EncodePubKey(op.BlockSigningKey)
-	enc.Encode(op.Props)
-	enc.Encode(op.Fee)
 	return enc.Err()
 }

@@ -38,7 +38,7 @@ func (op *ProposalCreateOperation) MarshalTransaction(encoder *transaction.Encod
 	if op.ReviewPeriodTime == nil {
 		enc.Encode(byte(0))
 	} else {
-		enc.Encode(byte(1))
+		//enc.Encode(byte(1))
 		enc.Encode(op.ReviewPeriodTime)
 	}
 	//enc.Encode(op.Extensions)

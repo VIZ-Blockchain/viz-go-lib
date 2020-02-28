@@ -27,6 +27,6 @@ func (op *AccountWitnessVoteOperation) MarshalTransaction(encoder *transaction.E
 	enc.EncodeUVarint(uint64(TypeAccountWitnessVote.Code()))
 	enc.Encode(op.Account)
 	enc.Encode(op.Witness)
-	enc.EncodeBool(op.Approve)
+	enc.Encode(op.Approve)
 	return enc.Err()
 }

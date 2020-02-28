@@ -13,8 +13,7 @@ type EscrowReleaseOperation struct {
 	Who         string      `json:"who"`
 	Receiver    string      `json:"receiver"`
 	EscrowID    uint32      `json:"escrow_id"`
-	SbdAmount   types.Asset `json:"sbd_amount"`
-	SteemAmount types.Asset `json:"steem_amount"`
+	TokenAmount types.Asset `json:"token_amount"`
 }
 
 //Type function that defines the type of operation EscrowReleaseOperation.
@@ -37,7 +36,6 @@ func (op *EscrowReleaseOperation) MarshalTransaction(encoder *transaction.Encode
 	enc.Encode(op.Who)
 	enc.Encode(op.Receiver)
 	enc.Encode(op.EscrowID)
-	enc.Encode(op.SbdAmount)
-	enc.Encode(op.SteemAmount)
+	enc.Encode(op.TokenAmount)
 	return enc.Err()
 }
