@@ -27,28 +27,28 @@ type Account struct {
 	AwardedRshares         uint64          `json:"awarded_rshares"`
 	CustomSequence         uint64          `json:"custom_sequence"`
 	CustomSequenceBlockNum uint64          `json:"custom_sequence_block_num"`
-	Energy                 int16           `json:"energy"`
+	Energy                 int32           `json:"energy"`
 	LastVoteTime           types.Time      `json:"last_vote_time"`
 	Balance                types.Asset     `json:"balance"`
-	CurationRewards        int64           `json:"curation_rewards"`
-	PostingRewards         int64           `json:"posting_rewards"`
-	ReceiverAwards         int64           `json:"receiver_awards"`
-	BenefactorAwards       int64           `json:"benefactor_awards"`
+	CurationRewards        uint64           `json:"curation_rewards"`
+	PostingRewards         uint64           `json:"posting_rewards"`
+	ReceiverAwards         uint64           `json:"receiver_awards"`
+	BenefactorAwards       uint64           `json:"benefactor_awards"`
 	VestingShares          types.Asset     `json:"vesting_shares"`
 	DelegatedVestingShares types.Asset     `json:"delegated_vesting_shares"`
 	ReceivedVestingShares  types.Asset     `json:"received_vesting_shares"`
 	VestingWithdrawRate    types.Asset     `json:"vesting_withdraw_rate"`
 	NextVestingWithdrawal  types.Time      `json:"next_vesting_withdrawal"`
-	Withdrawn              int64           `json:"withdrawn"`
-	ToWithdraw             int64           `json:"to_withdraw"`
+	Withdrawn              uint64           `json:"withdrawn"`
+	ToWithdraw             uint64           `json:"to_withdraw"`
 	WithdrawRoutes         uint16          `json:"withdraw_routes"`
 	ProxiedVsfVotes        []int64         `json:"proxied_vsf_votes"`
 	WitnessesVotedFor      uint16          `json:"witnesses_voted_for"`
-	WitnessesVoteWeight    int64           `json:"witnesses_vote_weight"`
+	WitnessesVoteWeight    string           `json:"witnesses_vote_weight"`
 	LastRootPost           types.Time      `json:"last_root_post"`
 	LastPost               types.Time      `json:"last_post"`
-	AverageBandwidth       int64           `json:"average_bandwidth"`
-	LifetimeBandwidth      int64           `json:"lifetime_bandwidth"`
+	AverageBandwidth       string           `json:"average_bandwidth"`
+	LifetimeBandwidth      string           `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    types.Time      `json:"last_bandwidth_update"`
 	WitnessVotes           []string        `json:"witness_votes"`
 	Valid                  bool            `json:"valid"`
@@ -79,68 +79,68 @@ type BlockHeader struct {
 
 //Config structure for the GetConfig function.
 type Config struct {
-	Percent100                       int       `json:"CHAIN_100_PERCENT"`
-	Percent1                         types.Int `json:"CHAIN_1_PERCENT"`
+	Percent100                       uint16       `json:"CHAIN_100_PERCENT"`
+	Percent1                         uint16 `json:"CHAIN_1_PERCENT"`
 	AddressPrefix                    string    `json:"CHAIN_ADDRESS_PREFIX"`
-	BandwidthAverageWindowSeconds    types.Int `json:"CHAIN_BANDWIDTH_AVERAGE_WINDOW_SECONDS"`
-	BandwidthPrecision               types.Int `json:"CHAIN_BANDWIDTH_PRECISION"`
-	ConsensusBandwidthReservePercent string    `json:"CONSENSUS_BANDWIDTH_RESERVE_PERCENT"`
-	ConsensusBandwidthReserveBelow   string    `json:"CONSENSUS_BANDWIDTH_RESERVE_BELOW"`
+	BandwidthAverageWindowSeconds    uint32 `json:"CHAIN_BANDWIDTH_AVERAGE_WINDOW_SECONDS"`
+	BandwidthPrecision               uint32 `json:"CHAIN_BANDWIDTH_PRECISION"`
+	ConsensusBandwidthReservePercent uint16    `json:"CONSENSUS_BANDWIDTH_RESERVE_PERCENT"`
+	ConsensusBandwidthReserveBelow   uint32    `json:"CONSENSUS_BANDWIDTH_RESERVE_BELOW"`
 	HardforkVersion                  string    `json:"CHAIN_HARDFORK_VERSION"`
 	Version                          string    `json:"CHAIN_VERSION"`
-	BlockInterval                    uint      `json:"CHAIN_BLOCK_INTERVAL"`
-	BlocksPerDay                     types.Int `json:"CHAIN_BLOCKS_PER_DAY"`
-	BlocksPerYear                    types.Int `json:"CHAIN_BLOCKS_PER_YEAR"`
-	CashoutWindowSeconds             types.Int `json:"CHAIN_CASHOUT_WINDOW_SECONDS"`
+	BlockInterval                    uint8      `json:"CHAIN_BLOCK_INTERVAL"`
+	BlocksPerDay                     uint16 `json:"CHAIN_BLOCKS_PER_DAY"`
+	BlocksPerYear                    uint32 `json:"CHAIN_BLOCKS_PER_YEAR"`
+	CashoutWindowSeconds             uint32 `json:"CHAIN_CASHOUT_WINDOW_SECONDS"`
 	ChainID                          string    `json:"CHAIN_ID"`
-	HardforkRequiredWitnesses        types.Int `json:"CHAIN_HARDFORK_REQUIRED_WITNESSES"`
+	HardforkRequiredWitnesses        uint8 `json:"CHAIN_HARDFORK_REQUIRED_WITNESSES"`
 	InitiatorName                    string    `json:"CHAIN_INITIATOR_NAME"`
 	InitiatorPublicKeyStr            string    `json:"CHAIN_INITIATOR_PUBLIC_KEY_STR"`
-	InitSupply                       types.Int `json:"CHAIN_INIT_SUPPLY"`
+	InitSupply                       string `json:"CHAIN_INIT_SUPPLY"`
 	CommitteeAccount                 string    `json:"CHAIN_COMMITTEE_ACCOUNT"`
 	CommitteePublicKeyStr            string    `json:"CHAIN_COMMITTEE_PUBLIC_KEY_STR"`
-	IrreversibleThreshold            types.Int `json:"CHAIN_IRREVERSIBLE_THRESHOLD"`
-	IrreversibleSupportMinRun        string    `json:"CHAIN_IRREVERSIBLE_SUPPORT_MIN_RUN"`
-	MaxAccountNameLength             types.Int `json:"CHAIN_MAX_ACCOUNT_NAME_LENGTH"`
-	MaxAccountWitnessVotes           types.Int `json:"CHAIN_MAX_ACCOUNT_WITNESS_VOTES"`
-	BlockSize                        types.Int `json:"CHAIN_BLOCK_SIZE"`
-	MaxCommentDepth                  types.Int `json:"CHAIN_MAX_COMMENT_DEPTH"`
-	MaxMemoLength                    string    `json:"CHAIN_MAX_MEMO_LENGTH"`
-	MaxWitnesses                     types.Int `json:"CHAIN_MAX_WITNESSES"`
-	MaxProxyRecursionDepth           types.Int `json:"CHAIN_MAX_PROXY_RECURSION_DEPTH"`
-	MaxReserveRatio                  types.Int `json:"CHAIN_MAX_RESERVE_RATIO"`
-	MaxSupportWitnesses              string    `json:"CHAIN_MAX_SUPPORT_WITNESSES"`
+	IrreversibleThreshold            uint16 `json:"CHAIN_IRREVERSIBLE_THRESHOLD"`
+	IrreversibleSupportMinRun        uint8    `json:"CHAIN_IRREVERSIBLE_SUPPORT_MIN_RUN"`
+	MaxAccountNameLength             uint8 `json:"CHAIN_MAX_ACCOUNT_NAME_LENGTH"`
+	MaxAccountWitnessVotes           uint8 `json:"CHAIN_MAX_ACCOUNT_WITNESS_VOTES"`
+	BlockSize                        uint32 `json:"CHAIN_BLOCK_SIZE"`
+	MaxCommentDepth                  uint32 `json:"CHAIN_MAX_COMMENT_DEPTH"`
+	MaxMemoLength                    uint16    `json:"CHAIN_MAX_MEMO_LENGTH"`
+	MaxWitnesses                     uint8 `json:"CHAIN_MAX_WITNESSES"`
+	MaxProxyRecursionDepth           uint8 `json:"CHAIN_MAX_PROXY_RECURSION_DEPTH"`
+	MaxReserveRatio                  uint16 `json:"CHAIN_MAX_RESERVE_RATIO"`
+	MaxSupportWitnesses              uint8    `json:"CHAIN_MAX_SUPPORT_WITNESSES"`
 	MaxShareSupply                   string    `json:"CHAIN_MAX_SHARE_SUPPLY"`
-	MaxSigCheckDepth                 types.Int `json:"CHAIN_MAX_SIG_CHECK_DEPTH"`
-	MaxTimeUntilExpiration           types.Int `json:"CHAIN_MAX_TIME_UNTIL_EXPIRATION"`
-	MaxTransactionSize               types.Int `json:"CHAIN_MAX_TRANSACTION_SIZE"`
-	MaxUndoHistory                   types.Int `json:"CHAIN_MAX_UNDO_HISTORY"`
-	MaxVoteChanges                   types.Int `json:"CHAIN_MAX_VOTE_CHANGES"`
-	MaxTopWitnesses                  string    `json:"CHAIN_MAX_TOP_WITNESSES"`
-	MaxWithdrawRoutes                types.Int `json:"CHAIN_MAX_WITHDRAW_ROUTES"`
-	MaxWitnessURLLength              types.Int `json:"CHAIN_MAX_WITNESS_URL_LENGTH"`
-	MinAccountCreationFee            types.Int `json:"CHAIN_MIN_ACCOUNT_CREATION_FEE"`
-	MinAccountNameLength             types.Int `json:"CHAIN_MIN_ACCOUNT_NAME_LENGTH"`
-	MinBlockSizeLimit                types.Int `json:"CHAIN_MIN_BLOCK_SIZE_LIMIT"`
-	MaxBlockSizeLimit                string    `json:"CHAIN_MAX_BLOCK_SIZE_LIMIT"`
+	MaxSigCheckDepth                 uint8 `json:"CHAIN_MAX_SIG_CHECK_DEPTH"`
+	MaxTimeUntilExpiration           uint16 `json:"CHAIN_MAX_TIME_UNTIL_EXPIRATION"`
+	MaxTransactionSize               uint32 `json:"CHAIN_MAX_TRANSACTION_SIZE"`
+	MaxUndoHistory                   uint16 `json:"CHAIN_MAX_UNDO_HISTORY"`
+	MaxVoteChanges                   uint8 `json:"CHAIN_MAX_VOTE_CHANGES"`
+	MaxTopWitnesses                  uint8    `json:"CHAIN_MAX_TOP_WITNESSES"`
+	MaxWithdrawRoutes                uint8 `json:"CHAIN_MAX_WITHDRAW_ROUTES"`
+	MaxWitnessURLLength              uint16 `json:"CHAIN_MAX_WITNESS_URL_LENGTH"`
+	MinAccountCreationFee            uint16 `json:"CHAIN_MIN_ACCOUNT_CREATION_FEE"`
+	MinAccountNameLength             uint8 `json:"CHAIN_MIN_ACCOUNT_NAME_LENGTH"`
+	MinBlockSizeLimit                uint32 `json:"CHAIN_MIN_BLOCK_SIZE_LIMIT"`
+	MaxBlockSizeLimit                uint32    `json:"CHAIN_MAX_BLOCK_SIZE_LIMIT"`
 	NullAccount                      string    `json:"CHAIN_NULL_ACCOUNT"`
-	NumInitiators                    string    `json:"CHAIN_NUM_INITIATORS"`
+	NumInitiators                    uint8    `json:"CHAIN_NUM_INITIATORS"`
 	ProxyToSelfAccount               string    `json:"CHAIN_PROXY_TO_SELF_ACCOUNT"`
-	SecondsPerYear                   types.Int `json:"CHAIN_SECONDS_PER_YEAR"`
-	VestingWithdrawIntervals         types.Int `json:"CHAIN_VESTING_WITHDRAW_INTERVALS"`
-	VestingWithdrawIntervalSeconds   types.Int `json:"CHAIN_VESTING_WITHDRAW_INTERVAL_SECONDS"`
-	EnergyRegenerationSeconds        string    `json:"CHAIN_ENERGY_REGENERATION_SECONDS"`
-	TokenSymbol                      string    `json:"TOKEN_SYMBOL"`
+	SecondsPerYear                   uint32 `json:"CHAIN_SECONDS_PER_YEAR"`
+	VestingWithdrawIntervals         uint8 `json:"CHAIN_VESTING_WITHDRAW_INTERVALS"`
+	VestingWithdrawIntervalSeconds   uint32 `json:"CHAIN_VESTING_WITHDRAW_INTERVAL_SECONDS"`
+	EnergyRegenerationSeconds        uint32    `json:"CHAIN_ENERGY_REGENERATION_SECONDS"`
+	TokenSymbol                      uint32    `json:"TOKEN_SYMBOL"`
 	SharesSymbol                     string    `json:"SHARES_SYMBOL"`
 	ChainName                        string    `json:"CHAIN_NAME"`
-	BlockGenerationPostponedTxLimit  string    `json:"CHAIN_BLOCK_GENERATION_POSTPONED_TX_LIMIT"`
-	PendingTransactionExecutionLimit string    `json:"CHAIN_PENDING_TRANSACTION_EXECUTION_LIMIT"`
+	BlockGenerationPostponedTxLimit  uint8    `json:"CHAIN_BLOCK_GENERATION_POSTPONED_TX_LIMIT"`
+	PendingTransactionExecutionLimit uint32    `json:"CHAIN_PENDING_TRANSACTION_EXECUTION_LIMIT"`
 }
 
 //DatabaseInfo structure for the GetDatabaseInfo function.
 type DatabaseInfo struct {
 	TotalSize    string              `json:"total_size"`
-	FreeSize     string              `json:"free_size"`
+	FreeSize     uint64              `json:"free_size"`
 	ReservedSize uint64              `json:"reserved_size"`
 	UsedSize     string              `json:"used_size"`
 	IndexList    []DatabaseInfoIndex `json:"index_list"`
@@ -375,7 +375,7 @@ type BroadcastResponse struct {
 //WitnessSchedule structure for the GetWitnessSchedule function.
 type WitnessSchedule struct {
 	ID                       types.Int             `json:"id"`
-	CurrentVirtualTime       types.UInt64          `json:"current_virtual_time"`
+	CurrentVirtualTime       string          `json:"current_virtual_time"`
 	NextShuffleBlockNum      uint32                `json:"next_shuffle_block_num"`
 	CurrentShuffledWitnesses string                `json:"current_shuffled_witnesses"`
 	NumScheduledWitnesses    uint8                 `json:"num_scheduled_witnesses"`
@@ -394,12 +394,12 @@ type Witness struct {
 	LastConfirmedBlockNum uint64                `json:"last_confirmed_block_num"`
 	SigningKey            string                `json:"signing_key"`
 	Props                 types.ChainProperties `json:"props"`
-	Votes                 int64                 `json:"votes"`
+	Votes                 string                 `json:"votes"`
 	PenaltyPercent        uint32                `json:"penalty_percent"`
-	CountedVotes          int64                 `json:"counted_votes"`
-	VirtualLastUpdate     types.UInt64          `json:"virtual_last_update"`
-	VirtualPosition       types.UInt64          `json:"virtual_position"`
-	VirtualScheduledTime  types.UInt64          `json:"virtual_scheduled_time"`
+	CountedVotes          string                 `json:"counted_votes"`
+	VirtualLastUpdate     string          `json:"virtual_last_update"`
+	VirtualPosition       string          `json:"virtual_position"`
+	VirtualScheduledTime  string          `json:"virtual_scheduled_time"`
 	LastWork              string                `json:"last_work"`
 	RunningVersion        string                `json:"running_version"`
 	HardforkVersionVote   string                `json:"hardfork_version_vote"`

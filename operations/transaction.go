@@ -9,8 +9,8 @@ import (
 
 // Transaction represents a blockchain transaction.
 type Transaction struct {
-	RefBlockNum    types.UInt16 `json:"ref_block_num"`
-	RefBlockPrefix types.UInt32 `json:"ref_block_prefix"`
+	RefBlockNum    uint32 `json:"ref_block_num"`
+	RefBlockPrefix uint32 `json:"ref_block_prefix"`
 	Expiration     *types.Time  `json:"expiration"`
 	Operations     Operations   `json:"operations"`
 	Signatures     []string     `json:"signatures"`
