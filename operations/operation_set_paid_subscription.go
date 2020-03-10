@@ -7,11 +7,11 @@ import (
 
 //SetPaidSubscriptionOperation represents set_paid_subscription operation data.
 type SetPaidSubscriptionOperation struct {
-	Account string      `json:"account"`
-	URL     string      `json:"url"`
-	Levels  uint16      `json:"levels"`
-	Amount  types.Asset `json:"amount"`
-	Period  uint16      `json:"period"`
+	Account string       `json:"account"`
+	URL     string       `json:"url"`
+	Levels  uint16       `json:"levels"`
+	Amount  *types.Asset `json:"amount"`
+	Period  uint16       `json:"period"`
 }
 
 //Type function that defines the type of operation SetPaidSubscriptionOperation.

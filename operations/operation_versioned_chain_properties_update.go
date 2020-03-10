@@ -7,8 +7,8 @@ import (
 
 //VersionedChainPropertiesUpdateOperation represents versioned_chain_properties_update operation data.
 type VersionedChainPropertiesUpdateOperation struct {
-	Owner string                `json:"owner"`
-	Props types.ChainProperties `json:"props"`
+	Owner string                 `json:"owner"`
+	Props *types.ChainProperties `json:"props"`
 }
 
 //Type function that defines the type of operation VersionedChainPropertiesUpdateOperation.

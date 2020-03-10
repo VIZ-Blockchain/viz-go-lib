@@ -7,10 +7,10 @@ import (
 
 //RecoverAccountOperation represents recover_account operation data.
 type RecoverAccountOperation struct {
-	AccountToRecover      string          `json:"account_to_recover"`
-	NewMasterAuthority    types.Authority `json:"new_master_authority"`
-	RecentMasterAuthority types.Authority `json:"recent_master_authority"`
-	Extensions            []interface{}   `json:"extensions"`
+	AccountToRecover      string           `json:"account_to_recover"`
+	NewMasterAuthority    *types.Authority `json:"new_master_authority"`
+	RecentMasterAuthority *types.Authority `json:"recent_master_authority"`
+	Extensions            []interface{}    `json:"extensions"`
 }
 
 //Type function that defines the type of operation RecoverAccountOperation.

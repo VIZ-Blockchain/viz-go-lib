@@ -7,9 +7,9 @@ import (
 
 //CreateInviteOperation represents create_invite operation data.
 type CreateInviteOperation struct {
-	Creator   string      `json:"creator"`
-	Balance   types.Asset `json:"balance"`
-	InviteKey string      `json:"invite_key"`
+	Creator   string       `json:"creator"`
+	Balance   *types.Asset `json:"balance"`
+	InviteKey string       `json:"invite_key"`
 }
 
 //Type function that defines the type of operation CreateInviteOperation.

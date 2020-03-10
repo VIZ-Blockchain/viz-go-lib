@@ -7,11 +7,11 @@ import (
 
 //BuyAccountOperation represents buy_account operation data.
 type BuyAccountOperation struct {
-	Buyer                 string      `json:"buyer"`
-	Account               string      `json:"account"`
-	AccountOfferPrice     types.Asset `json:"account_offer_price"`
-	AccountAuthoritiesKey string      `json:"account_authorities_key"`
-	TokensToShares        types.Asset `json:"tokens_to_shares"`
+	Buyer                 string       `json:"buyer"`
+	Account               string       `json:"account"`
+	AccountOfferPrice     *types.Asset `json:"account_offer_price"`
+	AccountAuthoritiesKey string       `json:"account_authorities_key"`
+	TokensToShares        *types.Asset `json:"tokens_to_shares"`
 }
 
 //Type function that defines the type of operation BuyAccountOperation.

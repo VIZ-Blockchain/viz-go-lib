@@ -7,12 +7,12 @@ import (
 
 //PaidSubscribeOperation represents paid_subscribe operation data.
 type PaidSubscribeOperation struct {
-	Subscriber  string      `json:"subscriber"`
-	Account     string      `json:"account"`
-	Level       uint16      `json:"level"`
-	Amount      types.Asset `json:"amount"`
-	Period      uint16      `json:"period"`
-	AutoRenewal bool        `json:"auto_renewal"`
+	Subscriber  string       `json:"subscriber"`
+	Account     string       `json:"account"`
+	Level       uint16       `json:"level"`
+	Amount      *types.Asset `json:"amount"`
+	Period      uint16       `json:"period"`
+	AutoRenewal bool         `json:"auto_renewal"`
 }
 
 //Type function that defines the type of operation PaidSubscribeOperation.

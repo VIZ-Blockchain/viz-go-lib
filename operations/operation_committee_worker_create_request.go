@@ -7,12 +7,12 @@ import (
 
 //CommitteeWorkerCreateRequestOperation represents committee_worker_create_request operation data.
 type CommitteeWorkerCreateRequestOperation struct {
-	Creator           string      `json:"creator"`
-	URL               string      `json:"url"`
-	Worker            string      `json:"worker"`
-	RequiredAmountMin types.Asset `json:"required_amount_min"`
-	RequiredAmountMax types.Asset `json:"required_amount_max"`
-	Duration          uint32      `json:"duration"`
+	Creator           string       `json:"creator"`
+	URL               string       `json:"url"`
+	Worker            string       `json:"worker"`
+	RequiredAmountMin *types.Asset `json:"required_amount_min"`
+	RequiredAmountMax *types.Asset `json:"required_amount_max"`
+	Duration          uint32       `json:"duration"`
 }
 
 //Type function that defines the type of operation CommitteeWorkerCreateRequestOperation.

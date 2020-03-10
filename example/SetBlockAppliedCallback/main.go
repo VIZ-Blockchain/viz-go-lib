@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	cls, _ := viz.NewClient("https://solox.world")
+	cls, _ := viz.NewClient("wss://solox.world/ws")
 	defer cls.Close()
 
 	cls.API.SetBlockAppliedCallback(func(block *api.CallbackBlockResponse, err error) {

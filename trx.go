@@ -25,8 +25,8 @@ func (client *Client) SendTrx(username string, strx []operations.Operation) (*ty
 		return nil, err
 	}
 	tx := transactions.NewSignedTransaction(&operations.Transaction{
-    RefBlockNum:    props.HeadBlockNumber,
-    RefBlockPrefix: refBlockPrefix,
+		RefBlockNum:    transactions.RefBlockNum(props.HeadBlockNumber),
+		RefBlockPrefix: refBlockPrefix,
 	})
 
 	// Adding Operations to a Transaction
@@ -89,8 +89,8 @@ func (client *Client) GetTrx(strx []operations.Operation) (*operations.Transacti
 		return nil, err
 	}
 	tx := &operations.Transaction{
-		RefBlockNum:   props.HeadBlockNumber,
-    RefBlockPrefix: refBlockPrefix,
+		RefBlockNum:    transactions.RefBlockNum(props.HeadBlockNumber),
+		RefBlockPrefix: refBlockPrefix,
 	}
 
 	// Adding Operations to a Transaction

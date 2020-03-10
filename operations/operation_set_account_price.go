@@ -7,10 +7,10 @@ import (
 
 //SetAccountPriceOperation represents set_account_price operation data.
 type SetAccountPriceOperation struct {
-	Account           string      `json:"account"`
-	AccountSeller     string      `json:"account_seller"`
-	AccountOfferPrice types.Asset `json:"account_offer_price"`
-	AccountOnSale     bool        `json:"account_on_sale"`
+	Account           string       `json:"account"`
+	AccountSeller     string       `json:"account_seller"`
+	AccountOfferPrice *types.Asset `json:"account_offer_price"`
+	AccountOnSale     bool         `json:"account_on_sale"`
 }
 
 //Type function that defines the type of operation SetAccountPriceOperation.

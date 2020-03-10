@@ -7,10 +7,10 @@ import (
 
 //SetSubaccountPriceOperation represents set_subaccount_price operation data.
 type SetSubaccountPriceOperation struct {
-	Account              string      `json:"account"`
-	SubAccountSeller     string      `json:"subaccount_seller"`
-	SubAccountOfferPrice types.Asset `json:"subaccount_offer_price"`
-	SubAccountOnSale     bool        `json:"subaccount_on_sale"`
+	Account              string       `json:"account"`
+	SubAccountSeller     string       `json:"subaccount_seller"`
+	SubAccountOfferPrice *types.Asset `json:"subaccount_offer_price"`
+	SubAccountOnSale     bool         `json:"subaccount_on_sale"`
 }
 
 //Type function that defines the type of operation SetSubaccountPriceOperation.

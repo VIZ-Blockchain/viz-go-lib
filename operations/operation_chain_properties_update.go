@@ -7,8 +7,8 @@ import (
 
 //ChainPropertiesUpdateOperation represents chain_properties_update operation data.
 type ChainPropertiesUpdateOperation struct {
-	Owner string                   `json:"owner"`
-	Props types.ChainPropertiesOLD `json:"props"`
+	Owner string                    `json:"owner"`
+	Props *types.ChainPropertiesOLD `json:"props"`
 }
 
 //Type function that defines the type of operation ChainPropertiesUpdateOperation.
