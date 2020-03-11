@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	cls, _ := viz.NewClient("https://solox.world")
+	cls, _ := viz.NewClient("wss://solox.world/ws")
 	defer cls.Close()
 
 	ans, err := cls.API.GetOpsInBlock(35137873, true)

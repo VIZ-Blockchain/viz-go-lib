@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	cls, _ := viz.NewClient("https://solox.world")
+	cls, _ := viz.NewClient("wss://solox.world/ws")
 	defer cls.Close()
 
 	cls.SetKeys(&viz.Keys{PKey: []string{"<Privat Posting Key>"}})
