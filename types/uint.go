@@ -3,7 +3,6 @@ package types
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"strconv"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
@@ -25,7 +24,7 @@ func unmarshalUInt(data []byte) (uint64, error) {
 	} else {
 		err = json.Unmarshal(data, &i)
 	}
-	return i, fmt.Errorf("types: failed to unmarshal unsigned integer: %s Error: %w", string(data), err)
+	return i, err
 }
 
 //UInt type from parameter JSON
