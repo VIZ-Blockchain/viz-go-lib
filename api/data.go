@@ -9,9 +9,9 @@ import (
 type Account struct {
 	ID                     types.Int       `json:"id"`
 	Name                   string          `json:"name"`
-	Master                 types.Authority `json:"master"`
-	Active                 types.Authority `json:"active"`
-	Regular                types.Authority `json:"regular"`
+	Master                 types.Authority `json:"master_authority"`
+	Active                 types.Authority `json:"active_authority"`
+	Regular                types.Authority `json:"regular_authority"`
 	MemoKey                string          `json:"memo_key"`
 	JSONMetadata           string          `json:"json_metadata"`
 	Proxy                  string          `json:"proxy"`
