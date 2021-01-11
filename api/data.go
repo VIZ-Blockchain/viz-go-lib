@@ -50,7 +50,7 @@ type Account struct {
 	LastRootPost           types.Time      `json:"last_root_post"`
 	LastPost               types.Time      `json:"last_post"`
 	AverageBandwidth       json.Number     `json:"average_bandwidth"`
-	LifetimeBandwidth      string          `json:"lifetime_bandwidth"`
+	LifetimeBandwidth      json.Number     `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    types.Time      `json:"last_bandwidth_update"`
 	WitnessVotes           []string        `json:"witness_votes"`
 	Valid                  bool            `json:"valid"`
