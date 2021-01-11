@@ -1,6 +1,8 @@
 package api
 
 import (
+	"encoding/json"
+
 	"github.com/VIZ-Blockchain/viz-go-lib/operations"
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
@@ -9,9 +11,9 @@ import (
 type Account struct {
 	ID                     types.Int       `json:"id"`
 	Name                   string          `json:"name"`
-	Master                 types.Authority `json:"master"`
-	Active                 types.Authority `json:"active"`
-	Regular                types.Authority `json:"regular"`
+	Master                 types.Authority `json:"master_authority"`
+	Active                 types.Authority `json:"active_authority"`
+	Regular                types.Authority `json:"regular_authority"`
 	MemoKey                string          `json:"memo_key"`
 	JSONMetadata           string          `json:"json_metadata"`
 	Proxy                  string          `json:"proxy"`
@@ -39,15 +41,15 @@ type Account struct {
 	ReceivedVestingShares  types.Asset     `json:"received_vesting_shares"`
 	VestingWithdrawRate    types.Asset     `json:"vesting_withdraw_rate"`
 	NextVestingWithdrawal  types.Time      `json:"next_vesting_withdrawal"`
-	Withdrawn              uint64          `json:"withdrawn"`
-	ToWithdraw             uint64          `json:"to_withdraw"`
+	Withdrawn              json.Number     `json:"withdrawn"`
+	ToWithdraw             json.Number     `json:"to_withdraw"`
 	WithdrawRoutes         uint16          `json:"withdraw_routes"`
 	ProxiedVsfVotes        []int64         `json:"proxied_vsf_votes"`
 	WitnessesVotedFor      uint16          `json:"witnesses_voted_for"`
-	WitnessesVoteWeight    string          `json:"witnesses_vote_weight"`
+	WitnessesVoteWeight    json.Number     `json:"witnesses_vote_weight"`
 	LastRootPost           types.Time      `json:"last_root_post"`
 	LastPost               types.Time      `json:"last_post"`
-	AverageBandwidth       string          `json:"average_bandwidth"`
+	AverageBandwidth       json.Number     `json:"average_bandwidth"`
 	LifetimeBandwidth      string          `json:"lifetime_bandwidth"`
 	LastBandwidthUpdate    types.Time      `json:"last_bandwidth_update"`
 	WitnessVotes           []string        `json:"witness_votes"`
