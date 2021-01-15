@@ -5,21 +5,28 @@ import (
 
 	"github.com/VIZ-Blockchain/viz-go-lib"
 	"github.com/VIZ-Blockchain/viz-go-lib/operations"
+	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
 func main() {
-	cls, _ := viz.NewClient("wss://solox.world/ws")
-	defer cls.Close()
+	client, _ := viz.NewClient("wss://solox.world/ws")
+	defer client.Close()
 
-	cls.SetKeys(&viz.Keys{PKey: []string{"<Privat Posting Key>"}})
+	client.SetKeys(&viz.Keys{PKey: []string{"<Private Posting Key>"}})
 
-	var trx []types.Operation
+	var trx []operations.Operation
 
-	tx := &types.VoteOperation{
-		Voter:    "<UserName>",
-		Author:   "<AuthorName>",
-		Permlink: "<Permlink>",
-		Weight:   types.Int16(Weight),
+	beneficiaries := []types.Beneficiary{
+		{Account: "<BeneficiaryName1>", Weight: 500},  // 5%
+		{Account: "<BeneficiaryName2>", Weight: 1500}, // 15%
+	}
+	tx := &operations.AwardOperation{
+		Initiator:      "<UserName>",
+		Receiver:       "<ReceiverName>",
+		Energy:         2000, // 20%
+		CustomSequence: 0,
+		Memo:           "test",
+		Beneficiaries:  beneficiaries,
 	}
 	trx = append(trx, tx)
 
