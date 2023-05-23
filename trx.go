@@ -1,6 +1,7 @@
 package viz
 
 import (
+	"errors"
 	"time"
 
 	"github.com/VIZ-Blockchain/viz-go-lib/api"
@@ -9,8 +10,11 @@ import (
 	"github.com/VIZ-Blockchain/viz-go-lib/types"
 )
 
-//SendTrx generates and sends an array of transactions to VIZ.
+// SendTrx generates and sends an array of transactions to VIZ.
 func (client *Client) SendTrx(username string, strx []operations.Operation) (*types.OperationResponse, error) {
+	if len(strx) < 1 {
+		return nil, errors.New("no operations")
+	}
 	var bresp types.OperationResponse
 
 	// Getting the necessary parameters
