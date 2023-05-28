@@ -3,7 +3,7 @@ package wif
 import (
 	"bytes"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
 // WifIsValid check that private key conform to public key
