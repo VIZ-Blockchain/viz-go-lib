@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/VIZ-Blockchain/viz-go-lib"
+	"github.com/biter777/viz-go-lib"
 )
 
 func main() {
