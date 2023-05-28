@@ -1,4 +1,4 @@
-module github.com/VIZ-Blockchain/viz-go-lib
+module github.com/biter777/viz-go-lib
 
 go 1.15
 
