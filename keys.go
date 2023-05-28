@@ -3,8 +3,8 @@ package viz
 import (
 	"errors"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/wif"
-	"github.com/VIZ-Blockchain/viz-go-lib/operations"
+	"github.com/biter777/viz-go-lib/encoding/wif"
+	"github.com/biter777/viz-go-lib/operations"
 )
 
 var (

@@ -4,10 +4,10 @@ import (
 	"errors"
 	"net/url"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/api"
-	"github.com/VIZ-Blockchain/viz-go-lib/transports"
-	"github.com/VIZ-Blockchain/viz-go-lib/transports/http"
-	"github.com/VIZ-Blockchain/viz-go-lib/transports/websocket"
+	"github.com/biter777/viz-go-lib/api"
+	"github.com/biter777/viz-go-lib/transports"
+	"github.com/biter777/viz-go-lib/transports/http"
+	"github.com/biter777/viz-go-lib/transports/websocket"
 )
 
 var (
