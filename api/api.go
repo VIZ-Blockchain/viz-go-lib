@@ -3,10 +3,10 @@ package api
 import (
 	"encoding/json"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/transports"
+	"github.com/biter777/viz-go-lib/transports"
 )
 
-//API plug-in structure
+// API plug-in structure
 type API struct {
 	caller transports.Caller
 }
@@ -15,7 +15,7 @@ var (
 	EmptyParams = []struct{}{}
 )
 
-//NewAPI plug-in initialization
+// NewAPI plug-in initialization
 func NewAPI(caller transports.Caller) *API {
 	return &API{caller}
 }

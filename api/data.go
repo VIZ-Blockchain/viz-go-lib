@@ -3,11 +3,11 @@ package api
 import (
 	"encoding/json"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/operations"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/operations"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//Account structure for the GetAccounts and LookupAccountNames function
+// Account structure for the GetAccounts and LookupAccountNames function
 type Account struct {
 	ID                     types.Int       `json:"id"`
 	Name                   string          `json:"name"`
@@ -62,14 +62,14 @@ type Account struct {
 	SubaccountOnSale       bool            `json:"subaccount_on_sale"`
 }
 
-//Block structure for the GetBlock function
+// Block structure for the GetBlock function
 type Block struct {
 	BlockHeader
 	WitnessSignature string                   `json:"witness_signature"`
 	Transactions     []operations.Transaction `json:"transactions"`
 }
 
-//BlockHeader structure for the GetBlockHeader function
+// BlockHeader structure for the GetBlockHeader function
 type BlockHeader struct {
 	Number                uint32        `json:"-"`
 	Timestamp             types.Time    `json:"timestamp"`
@@ -79,7 +79,7 @@ type BlockHeader struct {
 	Extensions            []interface{} `json:"extensions"`
 }
 
-//Config structure for the GetConfig function.
+// Config structure for the GetConfig function.
 type Config struct {
 	Percent100                       uint16 `json:"CHAIN_100_PERCENT"`
 	Percent1                         uint16 `json:"CHAIN_1_PERCENT"`
@@ -139,7 +139,7 @@ type Config struct {
 	PendingTransactionExecutionLimit uint32 `json:"CHAIN_PENDING_TRANSACTION_EXECUTION_LIMIT"`
 }
 
-//DatabaseInfo structure for the GetDatabaseInfo function.
+// DatabaseInfo structure for the GetDatabaseInfo function.
 type DatabaseInfo struct {
 	TotalSize    string              `json:"total_size"`
 	FreeSize     uint64              `json:"free_size"`
@@ -148,13 +148,13 @@ type DatabaseInfo struct {
 	IndexList    []DatabaseInfoIndex `json:"index_list"`
 }
 
-//DatabaseInfoIndex additional structure for the function GetDatabaseInfo.
+// DatabaseInfoIndex additional structure for the function GetDatabaseInfo.
 type DatabaseInfoIndex struct {
 	Name        string `json:"name"`
 	RecordCount uint64 `json:"record_count"`
 }
 
-//DynamicGlobalProperties structure for the GetDynamicGlobalProperties function.
+// DynamicGlobalProperties structure for the GetDynamicGlobalProperties function.
 type DynamicGlobalProperties struct {
 	ID                         types.Int   `json:"id"`
 	HeadBlockNumber            uint32      `json:"head_block_number"`
@@ -184,7 +184,7 @@ type DynamicGlobalProperties struct {
 	BandwidthReserveCandidates uint32      `json:"bandwidth_reserve_candidates"`
 }
 
-//VestingDelegationExpiration structure for the GetExpiringVestingDelegations function.
+// VestingDelegationExpiration structure for the GetExpiringVestingDelegations function.
 type VestingDelegationExpiration struct {
 	ID            types.Int   `json:"id"`
 	Delegator     string      `json:"delegator"`
@@ -192,13 +192,13 @@ type VestingDelegationExpiration struct {
 	Expiration    types.Time  `json:"expiration"`
 }
 
-//NextScheduledHardfork structure for the GetNextScheduledHardfork function.
+// NextScheduledHardfork structure for the GetNextScheduledHardfork function.
 type NextScheduledHardfork struct {
 	HfVersion string     `json:"hf_version"`
 	LiveTime  types.Time `json:"live_time"`
 }
 
-//MasterHistory structure for the GetMasterHistory function.
+// MasterHistory structure for the GetMasterHistory function.
 type MasterHistory struct {
 	ID                      types.Int       `json:"id"`
 	Account                 string          `json:"account"`
@@ -206,7 +206,7 @@ type MasterHistory struct {
 	LastValidTime           string          `json:"last_valid_time"`
 }
 
-//ProposalObject structure for the GetProposedTransaction function.
+// ProposalObject structure for the GetProposedTransaction function.
 type ProposalObject struct {
 	Author                    string                `json:"author"`
 	Title                     string                `json:"title"`
@@ -223,7 +223,7 @@ type ProposalObject struct {
 	AvailableKeyApprovals     []string              `json:"available_key_approvals"`
 }
 
-//VestingDelegation structure for the GetVestingDelegations function.
+// VestingDelegation structure for the GetVestingDelegations function.
 type VestingDelegation struct {
 	ID                types.Int   `json:"id"`
 	Delegator         string      `json:"delegator"`
@@ -232,7 +232,7 @@ type VestingDelegation struct {
 	MinDelegationTime types.Time  `json:"min_delegation_time"`
 }
 
-//WithdrawVestingRoutes structure for the GetWithdrawRoutes function.
+// WithdrawVestingRoutes structure for the GetWithdrawRoutes function.
 type WithdrawVestingRoutes struct {
 	FromAccount string `json:"from_account"`
 	ToAccount   string `json:"to_account"`
@@ -240,21 +240,21 @@ type WithdrawVestingRoutes struct {
 	AutoVest    bool   `json:"auto_vest"`
 }
 
-//AccountOnSale structure for the GetAccountsOnSale function.
+// AccountOnSale structure for the GetAccountsOnSale function.
 type AccountOnSale struct {
 	Account           string      `json:"account"`
 	AccountSeller     string      `json:"account_seller"`
 	AccountOfferPrice types.Asset `json:"account_offer_price"`
 }
 
-//SubAccountOnSale structure for the GetSubAccountsOnSale function.
+// SubAccountOnSale structure for the GetSubAccountsOnSale function.
 type SubAccountOnSale struct {
 	Account           string      `json:"account"`
 	AccountSeller     string      `json:"account_seller"`
 	AccountOfferPrice types.Asset `json:"account_offer_price"`
 }
 
-//PaidSubscription structure for the GetPaidSubscriptions function.
+// PaidSubscription structure for the GetPaidSubscriptions function.
 type PaidSubscription struct {
 	ID         types.Int  `json:"id"`
 	Creator    string     `json:"creator"`
@@ -265,7 +265,7 @@ type PaidSubscription struct {
 	UpdateTime types.Time `json:"update_time"`
 }
 
-//PaidSubscriptionState structure for the GetPaidSubscriptionOptions function.
+// PaidSubscriptionState structure for the GetPaidSubscriptionOptions function.
 type PaidSubscriptionState struct {
 	ID                                            types.Int  `json:"id"`
 	Creator                                       string     `json:"creator"`
@@ -282,7 +282,7 @@ type PaidSubscriptionState struct {
 	ActiveSubscribersWithAutoRenewalSummaryAmount int64      `json:"active_subscribers_with_auto_renewal_summary_amount"`
 }
 
-//PaidSubscribeState structure for the GetPaidSubscriptions function.
+// PaidSubscribeState structure for the GetPaidSubscriptions function.
 type PaidSubscribeState struct {
 	ID          types.Int  `json:"id"`
 	Subscriber  string     `json:"subscriber"`
@@ -297,7 +297,7 @@ type PaidSubscribeState struct {
 	AutoRenewal bool       `json:"auto_renewal"`
 }
 
-//InviteObject structure for the GetInviteById and GetInviteByKey function.
+// InviteObject structure for the GetInviteById and GetInviteByKey function.
 type InviteObject struct {
 	ID             types.Int   `json:"id"`
 	Creator        string      `json:"creator"`
@@ -311,7 +311,7 @@ type InviteObject struct {
 	Status         uint16      `json:"status"`
 }
 
-//CommitteeObject structure for the GetCommitteeRequest function.
+// CommitteeObject structure for the GetCommitteeRequest function.
 type CommitteeObject struct {
 	ID                     types.Int            `json:"id"`
 	RequestID              uint32               `json:"request_id"`
@@ -334,14 +334,14 @@ type CommitteeObject struct {
 	Votes                  []CommitteeVoteState `json:"votes"`
 }
 
-//CommitteeVoteState structure for the GetCommitteeRequest function.
+// CommitteeVoteState structure for the GetCommitteeRequest function.
 type CommitteeVoteState struct {
 	Voter       string     `json:"voter"`
 	VotePercent int16      `json:"vote_percent"`
 	LastUpdate  types.Time `json:"last_update"`
 }
 
-//Escrow structure for the GetEscrow function.
+// Escrow structure for the GetEscrow function.
 type Escrow struct {
 	ID                   types.Int   `json:"id"`
 	EscrowID             uint32      `json:"escrow_id"`
@@ -358,7 +358,7 @@ type Escrow struct {
 	IsApproved           bool        `json:"is_approved"`
 }
 
-//AccountRecoveryRequest structure for the GetRecoveryRequest function.
+// AccountRecoveryRequest structure for the GetRecoveryRequest function.
 type AccountRecoveryRequest struct {
 	ID                 types.Int       `json:"id"`
 	AccountToRecover   string          `json:"account_to_recover"`
@@ -366,7 +366,7 @@ type AccountRecoveryRequest struct {
 	Expires            types.Time      `json:"expires"`
 }
 
-//BroadcastResponse structure for the BroadcastTransactionSynchronous function
+// BroadcastResponse structure for the BroadcastTransactionSynchronous function
 type BroadcastResponse struct {
 	ID       string `json:"id"`
 	BlockNum int32  `json:"block_num"`
@@ -374,7 +374,7 @@ type BroadcastResponse struct {
 	Expired  bool   `json:"expired"`
 }
 
-//WitnessSchedule structure for the GetWitnessSchedule function.
+// WitnessSchedule structure for the GetWitnessSchedule function.
 type WitnessSchedule struct {
 	ID                       types.Int             `json:"id"`
 	CurrentVirtualTime       string                `json:"current_virtual_time"`
@@ -385,7 +385,7 @@ type WitnessSchedule struct {
 	MajorityVersion          string                `json:"majority_version"`
 }
 
-//Witness structure for the GetWitnessByAccount, GetWitnesses and GetWitnessByVote function.
+// Witness structure for the GetWitnessByAccount, GetWitnesses and GetWitnessByVote function.
 type Witness struct {
 	ID                    types.Int             `json:"id"`
 	Owner                 string                `json:"owner"`
