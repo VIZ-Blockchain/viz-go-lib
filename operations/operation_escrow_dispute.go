@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//EscrowDisputeOperation represents escrow_dispute operation data.
+// EscrowDisputeOperation represents escrow_dispute operation data.
 type EscrowDisputeOperation struct {
 	From     string `json:"from"`
 	To       string `json:"to"`
@@ -13,17 +13,17 @@ type EscrowDisputeOperation struct {
 	EscrowID uint32 `json:"escrow_id"`
 }
 
-//Type function that defines the type of operation EscrowDisputeOperation.
+// Type function that defines the type of operation EscrowDisputeOperation.
 func (op *EscrowDisputeOperation) Type() OpType {
 	return TypeEscrowDispute
 }
 
-//Data returns the operation data EscrowDisputeOperation.
+// Data returns the operation data EscrowDisputeOperation.
 func (op *EscrowDisputeOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type EscrowDisputeOperation to bytes.
+// MarshalTransaction is a function of converting type EscrowDisputeOperation to bytes.
 func (op *EscrowDisputeOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeEscrowDispute.Code()))

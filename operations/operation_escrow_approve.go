@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//EscrowApproveOperation represents escrow_approve operation data.
+// EscrowApproveOperation represents escrow_approve operation data.
 type EscrowApproveOperation struct {
 	From     string `json:"from"`
 	To       string `json:"to"`
@@ -14,17 +14,17 @@ type EscrowApproveOperation struct {
 	Approve  bool   `json:"approve"`
 }
 
-//Type function that defines the type of operation EscrowApproveOperation.
+// Type function that defines the type of operation EscrowApproveOperation.
 func (op *EscrowApproveOperation) Type() OpType {
 	return TypeEscrowApprove
 }
 
-//Data returns the operation data EscrowApproveOperation.
+// Data returns the operation data EscrowApproveOperation.
 func (op *EscrowApproveOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type EscrowApproveOperation to bytes.
+// MarshalTransaction is a function of converting type EscrowApproveOperation to bytes.
 func (op *EscrowApproveOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeEscrowApprove.Code()))

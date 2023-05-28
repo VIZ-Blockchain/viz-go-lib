@@ -1,27 +1,27 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//AccountWitnessVoteOperation represents account_witness_vote operation data.
+// AccountWitnessVoteOperation represents account_witness_vote operation data.
 type AccountWitnessVoteOperation struct {
 	Account string `json:"account"`
 	Witness string `json:"witness"`
 	Approve bool   `json:"approve"`
 }
 
-//Type function that defines the type of operation AccountWitnessVoteOperation.
+// Type function that defines the type of operation AccountWitnessVoteOperation.
 func (op *AccountWitnessVoteOperation) Type() OpType {
 	return TypeAccountWitnessVote
 }
 
-//Data returns the operation data AccountWitnessVoteOperation.
+// Data returns the operation data AccountWitnessVoteOperation.
 func (op *AccountWitnessVoteOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type AccountWitnessVoteOperation to bytes.
+// MarshalTransaction is a function of converting type AccountWitnessVoteOperation to bytes.
 func (op *AccountWitnessVoteOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeAccountWitnessVote.Code()))

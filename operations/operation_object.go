@@ -3,10 +3,10 @@ package operations
 import (
 	"encoding/json"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//OperationObject type from parameter JSON
+// OperationObject type from parameter JSON
 type OperationObject struct {
 	BlockNumber            uint32      `json:"block"`
 	TransactionID          string      `json:"trx_id"`
@@ -28,7 +28,7 @@ type rawOperationObject struct {
 	Timestamp              *types.Time     `json:"timestamp"`
 }
 
-//UnmarshalJSON unpacking the JSON parameter in the OperationObject type.
+// UnmarshalJSON unpacking the JSON parameter in the OperationObject type.
 func (op *OperationObject) UnmarshalJSON(p []byte) error {
 	var raw rawOperationObject
 	if err := json.Unmarshal(p, &raw); err != nil {
@@ -46,7 +46,7 @@ func (op *OperationObject) UnmarshalJSON(p []byte) error {
 	return nil
 }
 
-//MarshalJSON function for packing the OperationObject type in JSON.
+// MarshalJSON function for packing the OperationObject type in JSON.
 func (op *OperationObject) MarshalJSON() ([]byte, error) {
 	return JSONMarshal(&rawOperationObject{
 		BlockNumber:            op.BlockNumber,

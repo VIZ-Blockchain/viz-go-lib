@@ -3,11 +3,11 @@ package operations
 import (
 	"encoding/json"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//ContentOperation represents content operation data.
+// ContentOperation represents content operation data.
 type ContentOperation struct {
 	ParentAuthor   string        `json:"parent_author"`
 	ParentPermlink string        `json:"parent_permlink"`
@@ -19,22 +19,22 @@ type ContentOperation struct {
 	Extensions     []interface{} `json:"extensions"`
 }
 
-//Type function that defines the type of operation ContentOperation.
+// Type function that defines the type of operation ContentOperation.
 func (op *ContentOperation) Type() OpType {
 	return TypeContent
 }
 
-//Data returns the operation data ContentOperation.
+// Data returns the operation data ContentOperation.
 func (op *ContentOperation) Data() interface{} {
 	return op
 }
 
-//IsStory function specifies the type of publication.
+// IsStory function specifies the type of publication.
 func (op *ContentOperation) IsStory() bool {
 	return op.ParentAuthor == ""
 }
 
-//MarshalTransaction is a function of converting type ContentOperation to bytes.
+// MarshalTransaction is a function of converting type ContentOperation to bytes.
 func (op *ContentOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeContent.Code()))
