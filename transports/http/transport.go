@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/types"
 )
 
 type Transport struct {
