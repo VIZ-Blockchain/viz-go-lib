@@ -1,4 +1,4 @@
-# VIZ-Blockchain/viz-go-lib
+# viz-go-lib
 
 [![GoDoc](https://godoc.org/github.com/VIZ-Blockchain/viz-go-lib?status.svg)](https://godoc.org/github.com/VIZ-Blockchain/viz-go-lib)
 [![Go Report Card](https://goreportcard.com/badge/github.com/VIZ-Blockchain/viz-go-lib)](https://goreportcard.com/report/github.com/VIZ-Blockchain/viz-go-lib)
@@ -8,7 +8,7 @@ Golang RPC client library for [Viz](https://viz.world).
 ## Usage
 
 ```go
-import "github.com/VIZ-Blockchain/viz-go-lib"
+import "github.com/biter777/viz-go-lib"
 ```
 
 
