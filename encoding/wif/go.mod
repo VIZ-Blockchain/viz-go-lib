@@ -1,4 +1,4 @@
-module github.com/biter777/viz-go-lib/enconding/wif
+module wif
 
 go 1.19
 
