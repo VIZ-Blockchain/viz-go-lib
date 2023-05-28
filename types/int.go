@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
 func unmarshalInt(data []byte) (int64, error) {
@@ -28,10 +28,10 @@ func unmarshalInt(data []byte) (int64, error) {
 	return i, fmt.Errorf("types: failed to unmarshal integer: %v\n Error : %w", data, err)
 }
 
-//Int8 type from parameter JSON
+// Int8 type from parameter JSON
 type Int8 int8
 
-//UnmarshalJSON unpacking the JSON parameter in the Int8 type.
+// UnmarshalJSON unpacking the JSON parameter in the Int8 type.
 func (num *Int8) UnmarshalJSON(data []byte) error {
 	v, err := unmarshalInt(data)
 	if err != nil {
@@ -42,15 +42,15 @@ func (num *Int8) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-//MarshalTransaction is a function of converting type Int8 to bytes.
+// MarshalTransaction is a function of converting type Int8 to bytes.
 func (num Int8) MarshalTransaction(encoder *transaction.Encoder) error {
 	return encoder.EncodeNumber(int(num))
 }
 
-//Int16 type from parameter JSON
+// Int16 type from parameter JSON
 type Int16 int16
 
-//UnmarshalJSON unpacking the JSON parameter in the Int16 type.
+// UnmarshalJSON unpacking the JSON parameter in the Int16 type.
 func (num *Int16) UnmarshalJSON(data []byte) error {
 	v, err := unmarshalInt(data)
 	if err != nil {
@@ -61,15 +61,15 @@ func (num *Int16) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-//MarshalTransaction is a function of converting type Int16 to bytes.
+// MarshalTransaction is a function of converting type Int16 to bytes.
 func (num Int16) MarshalTransaction(encoder *transaction.Encoder) error {
 	return encoder.EncodeNumber(int16(num))
 }
 
-//Int32 type from parameter JSON
+// Int32 type from parameter JSON
 type Int32 int32
 
-//UnmarshalJSON unpacking the JSON parameter in the Int32 type.
+// UnmarshalJSON unpacking the JSON parameter in the Int32 type.
 func (num *Int32) UnmarshalJSON(data []byte) error {
 	v, err := unmarshalInt(data)
 	if err != nil {
@@ -80,15 +80,15 @@ func (num *Int32) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-//MarshalTransaction is a function of converting type Int32 to bytes.
+// MarshalTransaction is a function of converting type Int32 to bytes.
 func (num Int32) MarshalTransaction(encoder *transaction.Encoder) error {
 	return encoder.EncodeNumber(int32(num))
 }
 
-//Int64 type from parameter JSON
+// Int64 type from parameter JSON
 type Int64 int64
 
-//UnmarshalJSON unpacking the JSON parameter in the Int64 type.
+// UnmarshalJSON unpacking the JSON parameter in the Int64 type.
 func (num *Int64) UnmarshalJSON(data []byte) error {
 	v, err := unmarshalInt(data)
 	if err != nil {
@@ -99,7 +99,7 @@ func (num *Int64) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-//MarshalTransaction is a function of converting type Int64 to bytes.
+// MarshalTransaction is a function of converting type Int64 to bytes.
 func (num Int64) MarshalTransaction(encoder *transaction.Encoder) error {
 	return encoder.EncodeNumber(int64(num))
 }

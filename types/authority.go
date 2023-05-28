@@ -1,17 +1,17 @@
 package types
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//Authority is an additional structure used by other structures.
+// Authority is an additional structure used by other structures.
 type Authority struct {
 	WeightThreshold uint32         `json:"weight_threshold"`
 	AccountAuths    StringInt64Map `json:"account_auths"`
 	KeyAuths        StringInt64Map `json:"key_auths"`
 }
 
-//MarshalTransaction is a function of converting type Authority to bytes.
+// MarshalTransaction is a function of converting type Authority to bytes.
 func (auth *Authority) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeNumber(uint32(auth.WeightThreshold))

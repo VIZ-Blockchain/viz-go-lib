@@ -5,16 +5,16 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//Asset type from parameter JSON
+// Asset type from parameter JSON
 type Asset struct {
 	Amount float64
 	Symbol string
 }
 
-//UnmarshalJSON unpacking the JSON parameter in the Asset type.
+// UnmarshalJSON unpacking the JSON parameter in the Asset type.
 func (op *Asset) UnmarshalJSON(data []byte) error {
 	str, errUnq := strconv.Unquote(string(data))
 	if errUnq != nil {
@@ -33,12 +33,12 @@ func (op *Asset) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-//MarshalJSON function for packing the Asset type in JSON.
+// MarshalJSON function for packing the Asset type in JSON.
 func (op *Asset) MarshalJSON() ([]byte, error) {
 	return json.Marshal(op.String())
 }
 
-//MarshalTransaction is a function of converting type Asset to bytes.
+// MarshalTransaction is a function of converting type Asset to bytes.
 func (op *Asset) MarshalTransaction(encoder *transaction.Encoder) error {
 	ans, err := json.Marshal(op)
 	if err != nil {
@@ -73,7 +73,7 @@ func (op *Asset) MarshalTransaction(encoder *transaction.Encoder) error {
 	return enc.Err()
 }
 
-//String function convert type Asset to string.
+// String function convert type Asset to string.
 func (op *Asset) String() string {
 	var ammf string
 	if op.Symbol != "SHARES" {
@@ -84,7 +84,7 @@ func (op *Asset) String() string {
 	return ammf + " " + op.Symbol
 }
 
-//StringAmount function convert type Asset.Amount to string.
+// StringAmount function convert type Asset.Amount to string.
 func (op *Asset) StringAmount() string {
 	return strconv.FormatFloat(op.Amount, 'f', 3, 64)
 }

@@ -1,21 +1,21 @@
 package types
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//Beneficiary is an additional structure used by other structures.
+// Beneficiary is an additional structure used by other structures.
 type Beneficiary struct {
 	Account string `json:"account"`
 	Weight  uint16 `json:"weight"`
 }
 
-//CommentPayoutBeneficiaries is an additional structure used by other structures.
+// CommentPayoutBeneficiaries is an additional structure used by other structures.
 type CommentPayoutBeneficiaries struct {
 	Beneficiaries []Beneficiary `json:"beneficiaries"`
 }
 
-//MarshalTransaction is a function of converting type CommentPayoutBeneficiaries to bytes.
+// MarshalTransaction is a function of converting type CommentPayoutBeneficiaries to bytes.
 func (cp *CommentPayoutBeneficiaries) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.Encode(byte(0))
