@@ -1,11 +1,11 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//SetSubaccountPriceOperation represents set_subaccount_price operation data.
+// SetSubaccountPriceOperation represents set_subaccount_price operation data.
 type SetSubaccountPriceOperation struct {
 	Account              string       `json:"account"`
 	SubAccountSeller     string       `json:"subaccount_seller"`
@@ -13,17 +13,17 @@ type SetSubaccountPriceOperation struct {
 	SubAccountOnSale     bool         `json:"subaccount_on_sale"`
 }
 
-//Type function that defines the type of operation SetSubaccountPriceOperation.
+// Type function that defines the type of operation SetSubaccountPriceOperation.
 func (op *SetSubaccountPriceOperation) Type() OpType {
 	return TypeSetSubaccountPrice
 }
 
-//Data returns the operation data SetSubaccountPriceOperation.
+// Data returns the operation data SetSubaccountPriceOperation.
 func (op *SetSubaccountPriceOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type SetSubaccountPriceOperation to bytes.
+// MarshalTransaction is a function of converting type SetSubaccountPriceOperation to bytes.
 func (op *SetSubaccountPriceOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeSetSubaccountPrice.Code()))

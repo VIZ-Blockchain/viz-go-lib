@@ -1,3 +1,4 @@
+//go:build !nosigning
 // +build !nosigning
 
 package transactions
@@ -9,17 +10,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/operations"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/operations"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//SignedTransaction structure of a signed transaction
+// SignedTransaction structure of a signed transaction
 type SignedTransaction struct {
 	*operations.Transaction
 }
 
-//NewSignedTransaction initialization of a new signed transaction
+// NewSignedTransaction initialization of a new signed transaction
 func NewSignedTransaction(tx *operations.Transaction) *SignedTransaction {
 	if tx.Expiration == nil {
 		expiration := time.Now().Add(30 * time.Second).UTC()
@@ -29,7 +30,7 @@ func NewSignedTransaction(tx *operations.Transaction) *SignedTransaction {
 	return &SignedTransaction{tx}
 }
 
-//Serialize function serializes a transaction
+// Serialize function serializes a transaction
 func (tx *SignedTransaction) Serialize() ([]byte, error) {
 	var b bytes.Buffer
 	encoder := transaction.NewEncoder(&b)
@@ -40,7 +41,7 @@ func (tx *SignedTransaction) Serialize() ([]byte, error) {
 	return b.Bytes(), nil
 }
 
-//Digest function that returns a digest from a serialized transaction
+// Digest function that returns a digest from a serialized transaction
 func (tx *SignedTransaction) Digest(chain string) ([]byte, error) {
 	var msgBuffer bytes.Buffer
 
@@ -69,7 +70,7 @@ func (tx *SignedTransaction) Digest(chain string) ([]byte, error) {
 	return digest[:], nil
 }
 
-//Sign function directly generating transaction signature
+// Sign function directly generating transaction signature
 func (tx *SignedTransaction) Sign(privKeys [][]byte, chain string) error {
 	var buf bytes.Buffer
 	chainid, errdec := hex.DecodeString(chain)

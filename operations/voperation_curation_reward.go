@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//CurationRewardOperation represents curation_reward operation data.
+// CurationRewardOperation represents curation_reward operation data.
 type CurationRewardOperation struct {
 	Curator         string      `json:"curator"`
 	Reward          types.Asset `json:"reward"`
@@ -12,12 +12,12 @@ type CurationRewardOperation struct {
 	CommentPermlink string      `json:"comment_permlink"`
 }
 
-//Type function that defines the type of operation CurationRewardOperation.
+// Type function that defines the type of operation CurationRewardOperation.
 func (op *CurationRewardOperation) Type() OpType {
 	return TypeCurationReward
 }
 
-//Data returns the operation data CurationRewardOperation.
+// Data returns the operation data CurationRewardOperation.
 func (op *CurationRewardOperation) Data() interface{} {
 	return op
 }

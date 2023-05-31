@@ -3,13 +3,13 @@ package operations
 import (
 	"encoding/json"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//ProposalObjects array of values of type ProposalObject.
+// ProposalObjects array of values of type ProposalObject.
 type ProposalObjects []ProposalObject
 
-//ProposalObject type from parameter JSON
+// ProposalObject type from parameter JSON
 type ProposalObject struct {
 	Operation     Operation `json:"op"`
 	OperationType OpType    `json:"-"`
@@ -19,7 +19,7 @@ type rawProposalObject struct {
 	Operation *operationTuple `json:"op"`
 }
 
-//UnmarshalJSON unpacking the JSON parameter in the ProposalObject type.
+// UnmarshalJSON unpacking the JSON parameter in the ProposalObject type.
 func (op *ProposalObject) UnmarshalJSON(p []byte) error {
 	var raw rawProposalObject
 	if err := json.Unmarshal(p, &raw); err != nil {
@@ -31,14 +31,14 @@ func (op *ProposalObject) UnmarshalJSON(p []byte) error {
 	return nil
 }
 
-//MarshalJSON function for packing the ProposalObject type in JSON.
+// MarshalJSON function for packing the ProposalObject type in JSON.
 func (op *ProposalObject) MarshalJSON() ([]byte, error) {
 	return JSONMarshal(&rawProposalObject{
 		Operation: &operationTuple{op.Operation.Type(), op.Operation},
 	})
 }
 
-//MarshalTransaction is a function of converting type ProposalObjects to bytes.
+// MarshalTransaction is a function of converting type ProposalObjects to bytes.
 func (op ProposalObjects) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 

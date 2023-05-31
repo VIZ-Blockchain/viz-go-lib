@@ -6,15 +6,16 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
+
 	//"encoding/hex"
 	//"log"
 	"math/big"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/transactions/rfc6979"
+	"github.com/biter777/viz-go-lib/transactions/rfc6979"
 	secp256k1 "github.com/btcsuite/btcd/btcec"
 )
 
-//SignSingle signature of the transaction by one of the keys
+// SignSingle signature of the transaction by one of the keys
 func (tx *SignedTransaction) SignSingle(privB, data []byte) ([]byte, error) {
 	privKeyBytes := [32]byte{}
 	copy(privKeyBytes[:], privB)

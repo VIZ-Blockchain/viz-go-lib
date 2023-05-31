@@ -1,11 +1,11 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//AwardOperation represents award operation data.
+// AwardOperation represents award operation data.
 type AwardOperation struct {
 	Initiator      string              `json:"initiator"`
 	Receiver       string              `json:"receiver"`
@@ -15,17 +15,17 @@ type AwardOperation struct {
 	Beneficiaries  []types.Beneficiary `json:"beneficiaries"`
 }
 
-//Type function that defines the type of operation AwardOperation.
+// Type function that defines the type of operation AwardOperation.
 func (op *AwardOperation) Type() OpType {
 	return TypeAward
 }
 
-//Data returns the operation data AwardOperation.
+// Data returns the operation data AwardOperation.
 func (op *AwardOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type AwardOperation to bytes.
+// MarshalTransaction is a function of converting type AwardOperation to bytes.
 func (op *AwardOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeAward.Code()))

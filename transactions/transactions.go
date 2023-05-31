@@ -6,15 +6,15 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//RefBlockNum function returns blockNumber
+// RefBlockNum function returns blockNumber
 func RefBlockNum(blockNumber uint32) types.UInt16 {
 	return types.UInt16(blockNumber)
 }
 
-//RefBlockPrefix function returns block prefix
+// RefBlockPrefix function returns block prefix
 func RefBlockPrefix(blockID string) (types.UInt32, error) {
 	// Block ID is hex-encoded.
 	rawBlockID, err := hex.DecodeString(blockID)

@@ -1,11 +1,11 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//CommitteeWorkerCreateRequestOperation represents committee_worker_create_request operation data.
+// CommitteeWorkerCreateRequestOperation represents committee_worker_create_request operation data.
 type CommitteeWorkerCreateRequestOperation struct {
 	Creator           string       `json:"creator"`
 	URL               string       `json:"url"`
@@ -15,17 +15,17 @@ type CommitteeWorkerCreateRequestOperation struct {
 	Duration          uint32       `json:"duration"`
 }
 
-//Type function that defines the type of operation CommitteeWorkerCreateRequestOperation.
+// Type function that defines the type of operation CommitteeWorkerCreateRequestOperation.
 func (op *CommitteeWorkerCreateRequestOperation) Type() OpType {
 	return TypeCommitteeWorkerCreateRequest
 }
 
-//Data returns the operation data CommitteeWorkerCreateRequestOperation.
+// Data returns the operation data CommitteeWorkerCreateRequestOperation.
 func (op *CommitteeWorkerCreateRequestOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type CommitteeWorkerCreateRequestOperation to bytes.
+// MarshalTransaction is a function of converting type CommitteeWorkerCreateRequestOperation to bytes.
 func (op *CommitteeWorkerCreateRequestOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeCommitteeWorkerCreateRequest.Code()))

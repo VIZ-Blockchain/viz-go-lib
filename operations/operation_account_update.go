@@ -1,11 +1,11 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//AccountUpdateOperation represents account_update operation data.
+// AccountUpdateOperation represents account_update operation data.
 type AccountUpdateOperation struct {
 	Account      string           `json:"account"`
 	Master       *types.Authority `json:"master,omitempty"`
@@ -15,17 +15,17 @@ type AccountUpdateOperation struct {
 	JSONMetadata string           `json:"json_metadata"`
 }
 
-//Type function that defines the type of operation AccountUpdateOperation.
+// Type function that defines the type of operation AccountUpdateOperation.
 func (op *AccountUpdateOperation) Type() OpType {
 	return TypeAccountUpdate
 }
 
-//Data returns the operation data AccountUpdateOperation.
+// Data returns the operation data AccountUpdateOperation.
 func (op *AccountUpdateOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type AccountUpdateOperation to bytes.
+// MarshalTransaction is a function of converting type AccountUpdateOperation to bytes.
 func (op *AccountUpdateOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeAccountUpdate.Code()))

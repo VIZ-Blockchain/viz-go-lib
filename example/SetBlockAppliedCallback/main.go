@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"sync"
 
-	"github.com/VIZ-Blockchain/viz-go-lib"
-	"github.com/VIZ-Blockchain/viz-go-lib/api"
+	"github.com/biter777/viz-go-lib"
+	"github.com/biter777/viz-go-lib/api"
 )
 
 func main() {

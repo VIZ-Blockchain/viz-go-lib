@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//SetWithdrawVestingRouteOperation represents set_withdraw_vesting_route operation data.
+// SetWithdrawVestingRouteOperation represents set_withdraw_vesting_route operation data.
 type SetWithdrawVestingRouteOperation struct {
 	FromAccount string `json:"from_account"`
 	ToAccount   string `json:"to_account"`
@@ -12,17 +12,17 @@ type SetWithdrawVestingRouteOperation struct {
 	AutoVest    bool   `json:"auto_vest"`
 }
 
-//Type function that defines the type of operation SetWithdrawVestingRouteOperation.
+// Type function that defines the type of operation SetWithdrawVestingRouteOperation.
 func (op *SetWithdrawVestingRouteOperation) Type() OpType {
 	return TypeSetWithdrawVestingRoute
 }
 
-//Data returns the operation data SetWithdrawVestingRouteOperation.
+// Data returns the operation data SetWithdrawVestingRouteOperation.
 func (op *SetWithdrawVestingRouteOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type SetWithdrawVestingRouteOperation to bytes.
+// MarshalTransaction is a function of converting type SetWithdrawVestingRouteOperation to bytes.
 func (op *SetWithdrawVestingRouteOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeSetWithdrawVestingRoute.Code()))

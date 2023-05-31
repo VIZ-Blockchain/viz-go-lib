@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/VIZ-Blockchain/viz-go-lib"
-	"github.com/VIZ-Blockchain/viz-go-lib/operations"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib"
+	"github.com/biter777/viz-go-lib/operations"
+	"github.com/biter777/viz-go-lib/types"
 )
 
 func main() {

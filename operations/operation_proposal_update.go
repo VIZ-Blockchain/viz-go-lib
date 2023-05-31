@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//ProposalUpdateOperation represents proposal_update operation data.
+// ProposalUpdateOperation represents proposal_update operation data.
 type ProposalUpdateOperation struct {
 	Author                   string        `json:"author"`
 	Title                    string        `json:"title"`
@@ -19,17 +19,17 @@ type ProposalUpdateOperation struct {
 	Extensions               []interface{} `json:"extensions"`
 }
 
-//Type function that defines the type of operation ProposalUpdateOperation.
+// Type function that defines the type of operation ProposalUpdateOperation.
 func (op *ProposalUpdateOperation) Type() OpType {
 	return TypeProposalUpdate
 }
 
-//Data returns the operation data ProposalUpdateOperation.
+// Data returns the operation data ProposalUpdateOperation.
 func (op *ProposalUpdateOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type ProposalUpdateOperation to bytes.
+// MarshalTransaction is a function of converting type ProposalUpdateOperation to bytes.
 func (op *ProposalUpdateOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeProposalUpdate.Code()))

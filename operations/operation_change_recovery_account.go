@@ -1,27 +1,27 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//ChangeRecoveryAccountOperation represents change_recovery_account operation data.
+// ChangeRecoveryAccountOperation represents change_recovery_account operation data.
 type ChangeRecoveryAccountOperation struct {
 	AccountToRecover   string        `json:"account_to_recover"`
 	NewRecoveryAccount string        `json:"new_recovery_account"`
 	Extensions         []interface{} `json:"extensions"`
 }
 
-//Type function that defines the type of operation ChangeRecoveryAccountOperation.
+// Type function that defines the type of operation ChangeRecoveryAccountOperation.
 func (op *ChangeRecoveryAccountOperation) Type() OpType {
 	return TypeChangeRecoveryAccount
 }
 
-//Data returns the operation data ChangeRecoveryAccountOperation.
+// Data returns the operation data ChangeRecoveryAccountOperation.
 func (op *ChangeRecoveryAccountOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type ChangeRecoveryAccountOperation to bytes.
+// MarshalTransaction is a function of converting type ChangeRecoveryAccountOperation to bytes.
 func (op *ChangeRecoveryAccountOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeChangeRecoveryAccount.Code()))

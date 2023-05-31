@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//InviteRegistrationOperation represents invite_registration operation data.
+// InviteRegistrationOperation represents invite_registration operation data.
 type InviteRegistrationOperation struct {
 	Initiator      string `json:"initiator"`
 	NewAccountName string `json:"new_account_name"`
@@ -12,17 +12,17 @@ type InviteRegistrationOperation struct {
 	NewAccountKey  string `json:" new_account_key"`
 }
 
-//Type function that defines the type of operation InviteRegistrationOperation.
+// Type function that defines the type of operation InviteRegistrationOperation.
 func (op *InviteRegistrationOperation) Type() OpType {
 	return TypeInviteRegistration
 }
 
-//Data returns the operation data InviteRegistrationOperation.
+// Data returns the operation data InviteRegistrationOperation.
 func (op *InviteRegistrationOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type InviteRegistrationOperation to bytes.
+// MarshalTransaction is a function of converting type InviteRegistrationOperation to bytes.
 func (op *InviteRegistrationOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypeInviteRegistration.Code()))

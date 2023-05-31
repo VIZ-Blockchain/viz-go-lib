@@ -1,27 +1,27 @@
 package viz
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/operations"
-	"github.com/VIZ-Blockchain/viz-go-lib/transactions"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/operations"
+	"github.com/biter777/viz-go-lib/transactions"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//SetAsyncProtocol enables or disables the asynchronous operation protocol
+// SetAsyncProtocol enables or disables the asynchronous operation protocol
 func (client *Client) SetAsyncProtocol(value bool) {
 	client.asyncProtocol = value
 }
 
-//SetKeys you can specify keys for signing transactions.
+// SetKeys you can specify keys for signing transactions.
 func (client *Client) SetKeys(keys *Keys) {
 	client.CurrentKeys = keys
 }
 
-//SetAsset returns data of type Asset
+// SetAsset returns data of type Asset
 func SetAsset(amount float64, symbol string) *types.Asset {
 	return &types.Asset{Amount: amount, Symbol: symbol}
 }
 
-//JSONTrxString generate Trx to String
+// JSONTrxString generate Trx to String
 func JSONTrxString(v *transactions.SignedTransaction) (string, error) {
 	ans, err := types.JSONMarshal(v)
 	if err != nil {
@@ -30,7 +30,7 @@ func JSONTrxString(v *transactions.SignedTransaction) (string, error) {
 	return string(ans), nil
 }
 
-//JSONOpString generate Operations to String
+// JSONOpString generate Operations to String
 func JSONOpString(v []operations.Operation) (string, error) {
 	var tx operations.Operations
 
@@ -43,7 +43,7 @@ func JSONOpString(v []operations.Operation) (string, error) {
 	return string(ans), nil
 }
 
-//GenerateProposalOperation generate []Operation to ProposalOperations
+// GenerateProposalOperation generate []Operation to ProposalOperations
 func GenerateProposalOperation(ops []operations.Operation) operations.ProposalObjects {
 	var ans operations.ProposalObjects
 

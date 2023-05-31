@@ -1,10 +1,10 @@
 package types
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
 )
 
-//ChainProperties is an additional structure used by other structures.
+// ChainProperties is an additional structure used by other structures.
 type ChainProperties struct {
 	AccountCreationFee                    Asset  `json:"account_creation_fee,omitempty"`
 	MaximumBlockSize                      uint32 `json:"maximum_block_size,omitempty"`
@@ -26,7 +26,7 @@ type ChainProperties struct {
 	WitnessMissPenaltyDuration            uint32 `json:"witness_miss_penalty_duration,omitempty"`
 }
 
-//MarshalTransaction is a function of converting type ChainProperties to bytes.
+// MarshalTransaction is a function of converting type ChainProperties to bytes.
 func (cp *ChainProperties) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.Encode(cp.AccountCreationFee)
@@ -52,14 +52,14 @@ func (cp *ChainProperties) MarshalTransaction(encoder *transaction.Encoder) erro
 
 // Очень старое возможно даже можно будет удалить.
 
-//ChainProperties is an additional structure used by other structures.
+// ChainProperties is an additional structure used by other structures.
 type ChainPropertiesOLD struct {
 	AccountCreationFee *Asset `json:"account_creation_fee"`
 	MaximumBlockSize   uint32 `json:"maximum_block_size"`
 	SBDInterestRate    uint16 `json:"sbd_interest_rate"`
 }
 
-//MarshalTransaction is a function of converting type ChainPropertiesOLD to bytes.
+// MarshalTransaction is a function of converting type ChainPropertiesOLD to bytes.
 func (cp *ChainPropertiesOLD) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.Encode(cp.AccountCreationFee)

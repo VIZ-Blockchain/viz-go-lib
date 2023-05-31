@@ -1,11 +1,11 @@
 package operations
 
 import (
-	"github.com/VIZ-Blockchain/viz-go-lib/encoding/transaction"
-	"github.com/VIZ-Blockchain/viz-go-lib/types"
+	"github.com/biter777/viz-go-lib/encoding/transaction"
+	"github.com/biter777/viz-go-lib/types"
 )
 
-//PaidSubscribeOperation represents paid_subscribe operation data.
+// PaidSubscribeOperation represents paid_subscribe operation data.
 type PaidSubscribeOperation struct {
 	Subscriber  string       `json:"subscriber"`
 	Account     string       `json:"account"`
@@ -15,17 +15,17 @@ type PaidSubscribeOperation struct {
 	AutoRenewal bool         `json:"auto_renewal"`
 }
 
-//Type function that defines the type of operation PaidSubscribeOperation.
+// Type function that defines the type of operation PaidSubscribeOperation.
 func (op *PaidSubscribeOperation) Type() OpType {
 	return TypePaidSubscribe
 }
 
-//Data returns the operation data PaidSubscribeOperation.
+// Data returns the operation data PaidSubscribeOperation.
 func (op *PaidSubscribeOperation) Data() interface{} {
 	return op
 }
 
-//MarshalTransaction is a function of converting type PaidSubscribeOperation to bytes.
+// MarshalTransaction is a function of converting type PaidSubscribeOperation to bytes.
 func (op *PaidSubscribeOperation) MarshalTransaction(encoder *transaction.Encoder) error {
 	enc := transaction.NewRollingEncoder(encoder)
 	enc.EncodeUVarint(uint64(TypePaidSubscribe.Code()))
