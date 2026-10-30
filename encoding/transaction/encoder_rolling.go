@@ -60,6 +60,13 @@ func (encoder *RollingEncoder) EncodeArrString(v []string) {
 	}
 }
 
+//EncodeSHA256 adding a hex-encoded sha256 to the converted value
+func (encoder *RollingEncoder) EncodeSHA256(v string) {
+	if encoder.err == nil {
+		encoder.err = encoder.next.EncodeSHA256(v)
+	}
+}
+
 //Encode adding to a chain of other values
 func (encoder *RollingEncoder) Encode(v interface{}) {
 	if encoder.err == nil {

@@ -16,9 +16,9 @@ var dataObjects = map[OpType]Operation{
 	TypeTransferToVesting:              &TransferToVestingOperation{},
 	TypeWithdrawVesting:                &WithdrawVestingOperation{},
 	TypeAccountUpdate:                  &AccountUpdateOperation{},
-	TypeWitnessUpdate:                  &WitnessUpdateOperation{},
-	TypeAccountWitnessVote:             &AccountWitnessVoteOperation{},
-	TypeAccountWitnessProxy:            &AccountWitnessProxyOperation{},
+	TypeValidatorUpdate:                &ValidatorUpdateOperation{},
+	TypeAccountValidatorVote:           &AccountValidatorVoteOperation{},
+	TypeAccountValidatorProxy:          &AccountValidatorProxyOperation{},
 	TypeDeleteContent:                  &DeleteContentOperation{},
 	TypeCustom:                         &CustomOperation{},
 	TypeSetWithdrawVestingRoute:        &SetWithdrawVestingRouteOperation{},
@@ -40,7 +40,7 @@ var dataObjects = map[OpType]Operation{
 	TypeCurationReward:                 &CurationRewardOperation{},          //Virtual Operation
 	TypeContentReward:                  &ContentRewardOperation{},           //Virtual Operation
 	TypeFillVestingWithdraw:            &FillVestingWithdrawOperation{},     //Virtual Operation
-	TypeShutdownWitness:                &ShutdownWitnessOperation{},         //Virtual Operation
+	TypeShutdownValidator:              &ShutdownValidatorOperation{},       //Virtual Operation
 	TypeHardfork:                       &HardforkOperation{},                //Virtual Operation
 	TypeContentPayoutUpdate:            &ContentPayoutUpdateOperation{},     //Virtual Operation
 	TypeContentBenefactorReward:        &ContentBenefactorRewardOperation{}, //Virtual Operation
@@ -52,7 +52,7 @@ var dataObjects = map[OpType]Operation{
 	TypeCommitteeApproveRequest:        &CommitteeApproveRequestOperation{}, //Virtual Operation
 	TypeCommitteePayoutRequest:         &CommitteePayoutRequestOperation{},  //Virtual Operation
 	TypeCommitteePayRequest:            &CommitteePayRequestOperation{},     //Virtual Operation
-	TypeWitnessReward:                  &WitnessRewardOperation{},           //Virtual Operation
+	TypeValidatorReward:                &ValidatorRewardOperation{},         //Virtual Operation
 	TypeCreateInvite:                   &CreateInviteOperation{},
 	TypeClaimInviteBalance:             &ClaimInviteBalanceOperation{},
 	TypeInviteRegistration:             &InviteRegistrationOperation{},
@@ -68,6 +68,38 @@ var dataObjects = map[OpType]Operation{
 	TypeSetSubaccountPrice:             &SetSubaccountPriceOperation{},
 	TypeBuyAccount:                     &BuyAccountOperation{},
 	TypeAccountSale:                    &AccountSaleOperation{}, //Virtual Operation
+	TypeUseInviteBalance:               &UseInviteBalanceOperation{},
+	TypeExpireEscrowRatification:       &ExpireEscrowRatificationOperation{}, //Virtual Operation
+	TypeFixedAward:                     &FixedAwardOperation{},
+	TypeTargetAccountSale:              &TargetAccountSaleOperation{},
+	TypeBid:                            &BidOperation{},    //Virtual Operation
+	TypeOutbid:                         &OutbidOperation{}, //Virtual Operation
+	TypeSetRewardSharing:               &SetRewardSharingOperation{},
+	TypeStakeholderReward:              &StakeholderRewardOperation{}, //Virtual Operation
+	TypePMOracleRegister:               &PMOracleRegisterOperation{},
+	TypePMOracleUpdate:                 &PMOracleUpdateOperation{},
+	TypePMCreateMarket:                 &PMCreateMarketOperation{},
+	TypePMOracleAcceptMarket:           &PMOracleAcceptMarketOperation{},
+	TypePMPlaceBet:                     &PMPlaceBetOperation{},
+	TypePMCommitBet:                    &PMCommitBetOperation{},
+	TypePMRevealBet:                    &PMRevealBetOperation{},
+	TypePMCancelBet:                    &PMCancelBetOperation{},
+	TypePMAddLiquidity:                 &PMAddLiquidityOperation{},
+	TypePMWithdrawLiquidity:            &PMWithdrawLiquidityOperation{},
+	TypePMResolveMarket:                &PMResolveMarketOperation{},
+	TypePMNoContest:                    &PMNoContestOperation{},
+	TypePMDisputeCreate:                &PMDisputeCreateOperation{},
+	TypePMDisputeVote:                  &PMDisputeVoteOperation{},
+	TypePMDisputeResolve:               &PMDisputeResolveOperation{},
+	TypePMTransferPosition:             &PMTransferPositionOperation{},
+	TypePMLazyDeposit:                  &PMLazyDepositOperation{},
+	TypePMLazyWithdraw:                 &PMLazyWithdrawOperation{},
+	TypePMLeverageOpen:                 &PMLeverageOpenOperation{},
+	TypePMLeverageClose:                &PMLeverageCloseOperation{},
+	TypePMLeverageConvert:              &PMLeverageConvertOperation{},
+	TypePMDisputeOracleRespond:         &PMDisputeOracleRespondOperation{},
+	TypePMUnban:                        &PMUnbanOperation{},
+	TypeSetAgentPermission:             &SetAgentPermissionOperation{},
 }
 
 // Operation represents an operation stored in a transaction.

@@ -103,7 +103,7 @@ func check(url string) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("Error. URL: %s STATUS: %s\n", url, resp.StatusCode)
+		return fmt.Errorf("Error. URL: %s STATUS: %d\n", url, resp.StatusCode)
 	}
 	return nil
 }

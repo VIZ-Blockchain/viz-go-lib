@@ -3,6 +3,7 @@ package transaction
 import (
 	"bytes"
 	"encoding/binary"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
@@ -152,11 +153,26 @@ func (encoder *Encoder) EncodePubKey(s string) error {
 		if string(pkn2) == string(make([]byte, 33)) {
 			return encoder.WriteBytes(pkn2)
 		}
-		pkn3, _ := btcec.ParsePubKey(pkn2, btcec.S256())
+		pkn3, errParse := btcec.ParsePubKey(pkn2, btcec.S256())
+		if errParse != nil {
+			return fmt.Errorf("encoder: invalid public key %q: %w", s, errParse)
+		}
 		if _, err := encoder.w.Write(pkn3.SerializeCompressed()); err != nil {
 			return fmt.Errorf("encoder: failed to write bytes: %v\n Error : %w", pkn3.SerializeCompressed(), err)
 		}
 		return nil
 	}
 	return errors.New("Public key is incorrect")
+}
+
+//EncodeSHA256 writes a hex-encoded 32-byte hash (fc::sha256) as raw bytes.
+func (encoder *Encoder) EncodeSHA256(s string) error {
+	b, err := hex.DecodeString(strings.TrimPrefix(s, "0x"))
+	if err != nil {
+		return fmt.Errorf("encoder: failed to decode sha256 %q: %v", s, err)
+	}
+	if len(b) != 32 {
+		return fmt.Errorf("encoder: sha256 %q has %d bytes, want 32", s, len(b))
+	}
+	return encoder.WriteBytes(b)
 }
