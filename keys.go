@@ -12,8 +12,8 @@ var (
 	OpTypeKey = make(map[operations.OpType][]string)
 )
 
-//Keys is used as a keystroke for a specific user.
-//Only a few keys can be set.
+// Keys is used as a keystroke for a specific user.
+// Only a few keys can be set.
 type Keys struct {
 	PKey []string
 	AKey []string
@@ -63,7 +63,7 @@ func init() {
 	OpTypeKey["buy_account"] = []string{"active"}
 }
 
-//SigningKeys returns the key from the CurrentKeys
+// SigningKeys returns the key from the CurrentKeys
 func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 	var keys [][]byte
 
@@ -75,6 +75,9 @@ func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 	for _, val := range opKeys {
 		switch val {
 		case "regular":
+			if len(client.CurrentKeys.PKey) < 1 {
+				return nil, errors.New("Client Regular Key not initialized. Use SetKeys method")
+			}
 			for _, keyStr := range client.CurrentKeys.PKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
@@ -83,6 +86,9 @@ func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 				keys = append(keys, privKey)
 			}
 		case "active":
+			if len(client.CurrentKeys.AKey) < 1 {
+				return nil, errors.New("Client Active Key not initialized. Use SetKeys method")
+			}
 			for _, keyStr := range client.CurrentKeys.AKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
@@ -91,6 +97,9 @@ func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 				keys = append(keys, privKey)
 			}
 		case "master":
+			if len(client.CurrentKeys.OKey) < 1 {
+				return nil, errors.New("Client Master Key not initialized. Use SetKeys method")
+			}
 			for _, keyStr := range client.CurrentKeys.OKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
@@ -99,6 +108,9 @@ func (client *Client) SigningKeys(trx operations.Operation) ([][]byte, error) {
 				keys = append(keys, privKey)
 			}
 		case "memo":
+			if len(client.CurrentKeys.MKey) < 1 {
+				return nil, errors.New("Client Memo Key not initialized. Use SetKeys method")
+			}
 			for _, keyStr := range client.CurrentKeys.MKey {
 				privKey, err := wif.Decode(keyStr)
 				if err != nil {
